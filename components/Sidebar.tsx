@@ -20,7 +20,7 @@ import {
         />
   
         <div className="flex flex-col space-y-8">
-          <HomeIcon className="sidebarIcon text-white opacity-[0.85]" />
+          <HomeIcon className="sidebarIcon opacity-100" />
           <RiCompassFill className="sidebarIcon text-2xl" />
           <FaMicrophoneAlt className="sidebarIcon ml-1" />
           <ChartBarIcon className="sidebarIcon" />

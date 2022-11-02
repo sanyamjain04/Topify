@@ -1,14 +1,24 @@
+import { useRecoilState } from "recoil";
+import { playingTrackState } from "../atoms/playerAtom";
+import { Track } from "../types/body.types";
 import Body from "./Body";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
+  const [playingTrack, setPlayingTrack] =
+    useRecoilState<any>(playingTrackState);
+
+  const chooseTrack = (track : Track) => {
+    setPlayingTrack(track);
+  };
+  
   return (
     <main className="flex min-h-screen min-w-max bg-black lg:pb-24">
       <Sidebar />
       <Body
-      // chooseTrack={chooseTrack} 
+      chooseTrack={chooseTrack}
       // spotifyApi={spotifyApi}
-       />
+      />
       {/* <Right chooseTrack={chooseTrack} spotifyApi={spotifyApi} /> */}
 
       {/* {showPlayer && (

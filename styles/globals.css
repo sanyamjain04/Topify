@@ -12,7 +12,7 @@
 
 @layer components {
   .sidebarIcon {
-    @apply h-6 text-[#808080] cursor-pointer;
+    @apply h-6 cursor-pointer hover:opacity-70 text-white opacity-60;
   }
 
   .tag {
