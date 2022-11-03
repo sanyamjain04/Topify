@@ -24,12 +24,13 @@ module.exports = {
       },
     },
     fontFamily: {
-      body: ["Andada Pro", "serif"],
+      body: ["Ubuntu", "serif"],
       sans: ["ui-sans-serif", "system-ui"],
     },
   },
   variants: {
     extend: {},
+    scrollbar: ["rounded"],
   },
   plugins: [
     require("tailwind-scrollbar-hide"),

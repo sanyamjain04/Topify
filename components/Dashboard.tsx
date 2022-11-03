@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
   const [playingTrack, setPlayingTrack] =
-    useRecoilState<any>(playingTrackState);
+    useRecoilState<Track>(playingTrackState);
 
   const chooseTrack = (track : Track) => {
     setPlayingTrack(track);
