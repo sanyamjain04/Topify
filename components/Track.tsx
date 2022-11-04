@@ -3,7 +3,6 @@ import { AiFillHeart } from "react-icons/ai";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
-import { ImHeadphones } from "react-icons/im";
 import { Track } from "../types/body.types";
 import Image from "next/legacy/image";
 

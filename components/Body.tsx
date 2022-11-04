@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Track as TrackType } from "../types/body.types";
 import Poster from "./Poster";
 import Track from "./Track";
+import { useRecoilState } from "recoil";
+import { musicTrackState } from "../atoms/playerAtom";
 
 interface BodyProps {
   chooseTrack: (track: TrackType) => void;
@@ -11,7 +13,7 @@ interface BodyProps {
 const Body = ({ chooseTrack }: BodyProps) => {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchresults] = useState<string[]>([]);
-  const [music, setMusic] = useState<TrackType[]>([]);
+  const [musicTracks, setMusicTracks] = useRecoilState<TrackType[]>(musicTrackState);
 
   const genres = [
     "Classic",
@@ -26,7 +28,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
   ];
 
   useEffect(() => {
-    setMusic([
+    setMusicTracks([
       {
         layout: "5",
         type: "MUSIC",
@@ -4386,6 +4388,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
         properties: {},
       },
     ]);
+    
   }, []);
 
   // useEffect(() => {
@@ -4406,11 +4409,11 @@ const Body = ({ chooseTrack }: BodyProps) => {
   // console.log(music);
 
   return (
-    <section className="bg-black ml-24 py-4 space-y-8 md:max-w-6xl flex-grow md:mr-2.5">
+    <section className="bg-black ml-24 py-4 space-y-8 md:mr-2.5 w-[calc(100vw-110px)] md:max-w-6xl " >
       <Search search={search} setSearch={setSearch} />
-      <div className="grid overflow-y-scroll scrollbar-hide h-96 py-0 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-4">
+      <div className="flex flex-wrap gap-x-5 overflow-y-scroll scrollbar-hide md:h-[12.5rem] h-96 py-0 ml-2">
         {search.length === 0
-          ? music
+          ? musicTracks
               .slice(0, 4)
               .map((track, i) => (
                 <Poster key={i} track={track} chooseTrack={chooseTrack} />
@@ -4418,10 +4421,10 @@ const Body = ({ chooseTrack }: BodyProps) => {
           : "Loading"}
       </div>
 
-      <div className="flex gap-x-8 absolute min-w-full md:relative ml-6">
+      <div className="flex gap-x-8 md:relative ml-2 lg:ml-6">
 
         {/* Genres */}
-        <div className="hidden xl:inline max-w-[270px]">
+        <div className="hidden lg:inline max-w-[270px]">
           <h2 className="text-white font-bold mb-3">Genres</h2>
           <div className="flex gap-x-2 gap-y-2.5 flex-wrap mb-3">
             {genres.map((genre, i) => (
@@ -4433,14 +4436,14 @@ const Body = ({ chooseTrack }: BodyProps) => {
           </button>
         </div>
 
-        <div className=" w-max sm:w-full  pr-11">
+        <div className=" w-screen pr-2">
           <h2 className="text-white font-bold mb-3">
             {searchResults.length === 0 ? "New Releases" : "Tracks"}
           </h2>
-          <div className="space-y-3 border-2 border-[#262626] rounded-2xl p-3 bg-[#0D0D0D] overflow-y-scroll h-[1000px] md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500  w-[530px] sm:w-[830px]">
+          <div className="space-y-3 border-2 border-[#262626] rounded-2xl lg:p-3 bg-[#0D0D0D] overflow-y-scroll h-[1000px] md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500  md:w-[530px] lg:w-[830px]">
             {searchResults.length === 0 &&
-              music
-                .slice(4, music.length)
+              musicTracks
+                .slice(4, musicTracks.length)
                 .map((track, i) => (
                   <Track key={i} track={track} chooseTrack={chooseTrack} />
                 ))}

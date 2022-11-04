@@ -1,29 +1,27 @@
 import { useRecoilState } from "recoil";
-import { playingTrackState } from "../atoms/playerAtom";
+import { playingTrackState, recentlyPlayedTracks } from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
 import Body from "./Body";
 import Right from "./Right";
 import Sidebar from "./Sidebar";
-import { useState } from "react";
 import recentPlayedCache from '../utils/cache'
+import MusicPlayer from './musicplayer/index'
 
 const Dashboard = () => {
   const [playingTrack, setPlayingTrack] =
     useRecoilState<Track>(playingTrackState);
-  const [recentlyPlayed, setRecentlyPlayed] = useState<Track[]>([]);
+  const [recentlyPlayed, setRecentlyPlayed] = useRecoilState<Track[]>(recentlyPlayedTracks);
 
   const chooseTrack = (track: Track) => {
 
     const cachedData = recentPlayedCache(track.key, track)
     setRecentlyPlayed([...cachedData])
     
-    const reverse = recentlyPlayed.reverse()
-    
     setPlayingTrack(track);
   };
 
   return (
-    <main className="flex min-h-screen min-w-max bg-black lg:pb-24">
+    <main className="flex min-h-screen min-w-screen bg-black lg:pb-24">
       <Sidebar />
       <Body chooseTrack={chooseTrack} />
       {recentlyPlayed.length > 0 && (
@@ -33,11 +31,11 @@ const Dashboard = () => {
         />
       )}
 
-      {/* {showPlayer && (
+      {playingTrack && (
         <div className="fixed bottom-0 left-0 right-0 z-50">
-          <Player accessToken={accessToken} trackUri={playingTrack.uri} />
+          <MusicPlayer trackUrl={playingTrack?.url} />
         </div>
-      )} */}
+       )}
     </main>
   );
 };

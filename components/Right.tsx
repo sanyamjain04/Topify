@@ -13,7 +13,7 @@ interface RightProps {
 function Right({ chooseTrack, recentlyPlayed }:RightProps) {
 
   return (
-    <section className="p-4 space-y-8 pr-8">
+    <section className="p-4 space-y-8 pr-8 hidden lg:block">
       <div className="flex space-x-2 items-center justify-between">
         {/* Icons */}
         <div className="flex items-center space-x-4 border-2 border-[#262626] rounded-full h-12 py-3 px-4">

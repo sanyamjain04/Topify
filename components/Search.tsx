@@ -8,7 +8,7 @@ type SearchProps = {
 
 function Search({ search, setSearch }: SearchProps) {
   return (
-    <div className="max-w-[1150px] bg-[#1A1A1A] rounded-full overflow-hidden border-2 border-[#333333] p-1.5 px-5 pr-8 flex items-center">
+    <div className="w-5/6 lg:max-w-[1150px] bg-[#1A1A1A] rounded-full overflow-hidden border-2 border-[#333333] p-1.5 px-5 flex items-center md:ml-2">
       <div className="h-4 w-4 rounded-full border-2 flex-shrink-0 animate-pulse mr-1" />
       <input
         type="text"
@@ -18,7 +18,7 @@ function Search({ search, setSearch }: SearchProps) {
         placeholder="Search..."
       />
 
-      <div className="flex items-center divide-dotted divide-x-2 divide-[#333333] ml-auto">
+      <div className="items-center divide-dotted divide-x-2 divide-[#333333] ml-auto hidden lg:flex">
         <div className="flex space-x-2 pr-5">
           <button className="tag">Minimal</button>
           <button className="tag">House</button>

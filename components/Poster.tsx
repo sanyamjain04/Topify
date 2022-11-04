@@ -30,7 +30,7 @@ function Poster({ track, chooseTrack }: PosterProps) {
 
   return (
     <div
-      className="w-[260px] h-[340px] rounded-[50px] overflow-hidden relative text-white/80 cursor-pointer hover:scale-105 hover:text-white/100 transition duration-200 ease-out group mx-auto"
+      className="w-[160px] h-[200px] rounded-[50px] overflow-hidden relative text-white/80 cursor-pointer hover:scale-105 hover:text-white/100 transition duration-200 ease-out group"
         onClick={handlePlay}
     >
       <Image
