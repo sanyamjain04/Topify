@@ -22,7 +22,6 @@ function Search({ search, setSearch }: SearchProps) {
         <div className="flex space-x-2 pr-5">
           <button className="tag">Minimal</button>
           <button className="tag">House</button>
-          <button className="tag">Minimal</button>
         </div>
 
         <div className="flex items-center space-x-1.5 text-[#CECECE] pl-4">

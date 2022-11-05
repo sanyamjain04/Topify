@@ -1,4 +1,4 @@
- export interface Track {
+export interface Track {
   layout: string;
   type: string;
   key: string;

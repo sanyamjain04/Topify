@@ -22,11 +22,8 @@ function Poster({ track, chooseTrack }: PosterProps) {
 
     if (track.url === playingTrack?.url) {
       setPlay(!play);
-      
     }
   };
-  
-  
 
   return (
     <div
