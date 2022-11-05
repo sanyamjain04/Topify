@@ -29,8 +29,8 @@ function Right({ chooseTrack, recentlyPlayed }:RightProps) {
 
       {/* Recently Played Tracks */}
       <div className="bg-[#0D0D0D] border-2 border-[#262626] p-4 rounded-xl space-y-4">
-        <div className="flex items-center justify-between">
-          <h4 className="text-white font-semibold text-sm">Recently Played</h4>
+        <div className="flex items-center justify-between gap-5">
+          <h4 className="text-white font-semibold text-sm whitespace-nowrap">Recently Played</h4>
           <ViewGridIcon className="text-[#686868] h-6" />
         </div>
 

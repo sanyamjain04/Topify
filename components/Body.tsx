@@ -13,7 +13,8 @@ interface BodyProps {
 const Body = ({ chooseTrack }: BodyProps) => {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchresults] = useState<string[]>([]);
-  const [musicTracks, setMusicTracks] = useRecoilState<TrackType[]>(musicTrackState);
+  const [musicTracks, setMusicTracks] =
+    useRecoilState<TrackType[]>(musicTrackState);
 
   const genres = [
     "Classic",
@@ -26,10 +27,6 @@ const Body = ({ chooseTrack }: BodyProps) => {
     "Hip-hop",
     "Blues",
   ];
-
-  
-    
-  
 
   // useEffect(() => {
   //   const options = {
@@ -49,7 +46,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
   // console.log(music);
 
   return (
-    <section className="bg-black ml-24 py-4 space-y-8 md:mr-2.5 w-[calc(100vw-110px)] md:max-w-7xl" >
+    <section className="bg-black ml-24 py-4 space-y-8 md:mr-2.5 w-[calc(100vw-110px)] md:max-w-7xl">
       <Search search={search} setSearch={setSearch} />
       <div className="flex flex-wrap gap-x-5 overflow-y-scroll scrollbar-hide md:h-[12.5rem] h-96 py-0 ml-2">
         {search.length === 0
@@ -62,13 +59,14 @@ const Body = ({ chooseTrack }: BodyProps) => {
       </div>
 
       <div className="flex gap-x-8 md:relative ml-2 lg:ml-6">
-
         {/* Genres */}
         <div className="hidden lg:inline max-w-[270px]">
           <h2 className="text-white font-bold mb-3">Genres</h2>
           <div className="flex gap-x-2 gap-y-2.5 flex-wrap mb-3">
             {genres.map((genre, i) => (
-              <div key={i} className="genre">{genre}</div>
+              <div key={i} className="genre">
+                {genre}
+              </div>
             ))}
           </div>
           <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
@@ -80,14 +78,13 @@ const Body = ({ chooseTrack }: BodyProps) => {
           <h2 className="text-white font-bold mb-3">
             {searchResults.length === 0 ? "New Releases" : "Tracks"}
           </h2>
-          <div className="space-y-3 border-2 border-[#262626] rounded-2xl lg:p-3 bg-[#0D0D0D] overflow-y-scroll h-[370px] md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500  md:w-[655px] lg:w-[780px]">
-            {searchResults.length === 0 &&
-              musicTracks
-                .slice(4, musicTracks.length)
-                .map((track, i) => (
-                  <Track key={i} track={track} chooseTrack={chooseTrack} />
-                ))}
+
+          <div className="space-y-3 border-2 border-[#262626] rounded-2xl lg:p-3 bg-[#0D0D0D] overflow-y-scroll h-[370px]  md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500  md:w-[655px] lg:w-[780px]">
+            {musicTracks.slice(4, musicTracks.length).map((track, i) => (
+              <Track key={i} track={track} chooseTrack={chooseTrack} />
+            ))}
           </div>
+          
           <div className="h-20" />
         </div>
       </div>
