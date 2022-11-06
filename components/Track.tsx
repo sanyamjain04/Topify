@@ -39,7 +39,7 @@ function Track({ track, chooseTrack }: TrackProps) {
           height={48}
         />
         <div>
-          <h4 className="text-white text-sm font-semibold truncate w-56 sm:w-[450px]">
+          <h4 className="text-white text-sm font-semibold truncate w-56 sm:w-[380px]">
             {track.title}
           </h4>
           <p className="text-[rgb(179,179,179)] text-[13px] font-semibold group-hover:text-white">

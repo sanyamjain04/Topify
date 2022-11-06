@@ -4,6 +4,9 @@ import { BiBell } from "react-icons/bi";
 import { ViewGridIcon } from "@heroicons/react/solid";
 import { Track } from "../types/body.types";
 import RecentlyPlayed from "./RecentlyPlayed";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import Dropdown from "./Dropdown";
 
 interface RightProps {
   chooseTrack: (track: Track) => void;
@@ -11,6 +14,10 @@ interface RightProps {
 }
 
 function Right({ chooseTrack, recentlyPlayed }: RightProps) {
+  const { data: session } = useSession();
+  console.log(session);
+  
+
   return (
     <section className="p-4 space-y-8 hidden lg:block min-w-[280px]">
       <div className="flex space-x-2 items-center justify-between">
@@ -23,7 +30,7 @@ function Right({ chooseTrack, recentlyPlayed }: RightProps) {
           </div>
         </div>
         {/* Profile */}
-        {/* <Dropdown /> */}
+        <Dropdown />
       </div>
 
       {/* Recently Played Tracks */}
@@ -38,12 +45,19 @@ function Right({ chooseTrack, recentlyPlayed }: RightProps) {
 
           <div className="space-y-4 overflow-y-scroll overflow-x-hidden h-[250px] md:h-[400px] scrollbarThin">
             {[...recentlyPlayed].reverse().map((track, i) => (
-              <RecentlyPlayed key={i} track={track} chooseTrack={chooseTrack} button={false} />
+              <RecentlyPlayed
+                key={i}
+                track={track}
+                chooseTrack={chooseTrack}
+                button={false}
+              />
             ))}
           </div>
-          <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
-            View All
-          </button>
+          <Link href="/history">
+            <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
+              View All
+            </button>
+          </Link>
         </div>
       )}
     </section>

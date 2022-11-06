@@ -29,7 +29,7 @@ export default function History() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {recentlyPlayed.length > 0 ? (
-        <div className="m-4 ml-10 md:ml-28">
+        <div className="m-4 ml-10 sm:ml-28">
           <h1 className="text-white mb-5">History</h1>
           <div className="space-y-3 border-2 border-[#262626] rounded-2xl lg:p-3 bg-[#0D0D0D] overflow-y-scroll h-[370px]  md:h-[22.9rem] scrollbarThin md:w-[655px] lg:w-[780px] w-full">
             {[...recentlyPlayed].reverse().map((track, i) => (
