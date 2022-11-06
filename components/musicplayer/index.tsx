@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, KeyboardEvent, MouseEvent } from "react";
 import { useRecoilState } from "recoil";
 import {
   musicTrackState,
@@ -15,10 +15,9 @@ import Seekbar from "./Seekbar";
 import VolumeBar from "./VolumeBar";
 
 const MusicPlayer = () => {
-  const [play, setplay] = useRecoilState(playState);
+  const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
-  const [recentlyPlayed, setRecentlyPlayed] =
-    useRecoilState(recentlyPlayedTracks);
+  const [recentlyPlayed, setRecentlyPlayed] = useRecoilState(recentlyPlayedTracks);
   const [musicTracks, setmusicTracks] = useRecoilState(musicTrackState);
   const [duration, setDuration] = useState(0);
   const [seekTime, setSeekTime] = useState(0);
@@ -30,8 +29,9 @@ const MusicPlayer = () => {
   const currentTrackKey = playingTrack?.key;
   const index = musicTracks.findIndex((track) => track.key === currentTrackKey);
 
+
   const handlePlayPause = () => {
-    setplay(!play);
+    setPlay(!play);
   };
 
   const chooseTrack = (track: TrackType) => {
@@ -59,7 +59,7 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div className="bg-[#181818] flex items-center justify-between px-5 py-2.5 rounded-t-2xl relative space-x-20 md:space-x-0 overflow-x-scroll md:overflow-x-hidden scrollbar-hide">
+    <div className="bg-[#181818] flex items-center justify-between px-5 py-2.5 rounded-t-2xl relative sm:space-x-20 md:space-x-0 overflow-x-scroll md:overflow-x-hidden scrollbar-hide">
       <Track play={play} playingTrack={playingTrack} />
       <div className="flex-1 flex flex-col items-center justify-center">
         <Controls

@@ -10,8 +10,9 @@ const Layout = ({ children }: any) => {
     useRecoilState<Track>(playingTrackState);
 
   return (
-    <main className="flex min-h-screen min-w-screen bg-black lg:pb-24">
+    <>
       <Sidebar />
+    <main className="flex min-h-screen min-w-full bg-black">
 
       {children}
 
@@ -21,6 +22,7 @@ const Layout = ({ children }: any) => {
         </div>
       )}
     </main>
+      </>
   );
 };
 

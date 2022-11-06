@@ -3,21 +3,21 @@ import { Track } from "../types/body.types";
 import { musicTracksData } from '../data/musicTracks'
 
 export const playState = atom({
-  key: "playState",
+  key: "1",
   default: false,
 });
 
 export const playingTrackState = atom<Track>({
-  key: "playingTrackState",
+  key: "2",
   default: undefined,
 });
 
 export const musicTrackState = atom<Track[]>({
-  key: "MusicTrackState",
+  key: "3",
   default: [...musicTracksData]
 });
 
 export const recentlyPlayedTracks = atom<Track[]>({
-  key: "recentlyPlayed",
+  key: "4",
   default: [],
 });

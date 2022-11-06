@@ -22,7 +22,6 @@ const Body = ({ chooseTrack }: BodyProps) => {
     "Electronic",
     "Minimal",
     "Chillout",
-    "Country",
     "Techno",
     "Hip-hop",
     "Blues",
@@ -46,7 +45,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
   // console.log(music);
 
   return (
-    <section className="bg-black ml-24 py-4 space-y-8 md:mr-2.5 w-[calc(100vw-110px)] md:max-w-7xl">
+    <section className="bg-black ml-2 md:ml-24 py-4 space-y-8 md:mr-2.5 w-[calc(100vw-110px)] md:max-w-6xl">
       <Search search={search} setSearch={setSearch} />
       <div className="flex flex-wrap gap-x-5 overflow-y-scroll scrollbar-hide md:h-[12.5rem] h-96 py-0 ml-2">
         {search.length === 0
@@ -69,7 +68,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
               </div>
             ))}
           </div>
-          <button className="text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
+          <button className="whitespace-nowrap   text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
             All Genres
           </button>
         </div>
@@ -79,13 +78,12 @@ const Body = ({ chooseTrack }: BodyProps) => {
             {searchResults.length === 0 ? "New Releases" : "Tracks"}
           </h2>
 
-          <div className="space-y-3 border-2 border-[#262626] rounded-2xl lg:p-3 bg-[#0D0D0D] overflow-y-scroll h-[370px]  md:h-96 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500  md:w-[655px] lg:w-[780px]">
+          <div className="space-y-3 border-2 border-[#262626] rounded-2xl lg:p-3 bg-[#0D0D0D] overflow-y-scroll h-[370px]  md:h-[22.9rem] scrollbarThin md:w-[655px] lg:w-[780px]">
             {musicTracks.slice(4, musicTracks.length).map((track, i) => (
               <Track key={i} track={track} chooseTrack={chooseTrack} />
             ))}
           </div>
           
-          <div className="h-20" />
         </div>
       </div>
     </section>

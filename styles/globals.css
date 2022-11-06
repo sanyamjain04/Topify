@@ -10,7 +10,7 @@
 
 @layer components {
   .sidebarIcon {
-    @apply h-6 cursor-pointer hover:opacity-70 text-white opacity-60;
+    @apply h-6 w-6 cursor-pointer hover:opacity-70 text-white opacity-60 text-2xl;
   }
 
   .tag {
@@ -31,5 +31,9 @@
 
   .playerIcon {
     @apply transition ease-out transform hover:scale-105 hover:text-white;
+  }
+
+  .scrollbarThin {
+    @apply scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500
   }
 }

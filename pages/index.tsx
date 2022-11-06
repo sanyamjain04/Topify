@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>Spotify </title>
         <meta
@@ -14,8 +14,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <Sidebar selectedCategory="/" />
-        <Dashboard />
-    </div>
+      <Dashboard />
+    </>
   );
 }

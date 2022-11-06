@@ -1,13 +1,15 @@
+import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
 
 interface RecentlyPlayedprops {
-    track : Track
-    chooseTrack : (track : Track) => void
+  track: Track;
+  chooseTrack: (track: Track) => void;
+  button: boolean;
 }
 
-function RecentlyPlayed({ track, chooseTrack }:RecentlyPlayedprops) {
+function RecentlyPlayed({ track, chooseTrack, button }: RecentlyPlayedprops) {
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
@@ -20,19 +22,40 @@ function RecentlyPlayed({ track, chooseTrack }:RecentlyPlayedprops) {
   };
 
   return (
-    <div className="flex items-center space-x-3" onClick={handlePlay}>
+    <div className="flex items-center space-x-3 px-2 py-1" onClick={handlePlay}>
       <img
         src={track.images.coverart}
         alt=""
         className="rounded-full w-[52px] h-[52px]"
       />
-      <div>
+      <div className="flex-grow flex flex-col">
         <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
           {track.title}
         </h4>
         <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
-          {(track.artists[0].alias).replace("-"," ")}
+          {track.artists[0].alias.replace("-", " ")}
         </p>
+      </div>
+      <div className={button ? "justify-self-end" : "hidden"}>
+        {track.url === playingTrack?.url && play ? (
+          <>
+            <div
+              className="h-10 w-10 rounded-full border border-[#15883e] flex items-center justify-center bg-[#15883e] icon hover:scale-110"
+              onClick={handlePlay}
+            >
+              <BsFillPauseFill className="text-white text-xl" />
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              className="h-10 w-10 rounded-full border border-white/60 flex items-center justify-center  hover:bg-[#15883e] hover:border-[#15883e] icon hover:scale-110"
+              onClick={handlePlay}
+            >
+              <BsFillPlayFill className="text-white text-xl ml-[1px]" />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
