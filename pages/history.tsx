@@ -14,8 +14,6 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <Sidebar selectedCategory="/" />
-        <Dashboard />
     </div>
   );
 }
