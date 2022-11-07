@@ -12,6 +12,9 @@ export default function Home() {
       router.push("/auth/signin");
     },
   });
+  if(session){
+    router.push("/auth/signin")
+  }
 
   // Loading animation...
   if (status === "loading") {
