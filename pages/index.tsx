@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import Loader from "../components/Loader";
 
@@ -12,9 +13,11 @@ export default function Home() {
       router.push("/auth/signin");
     },
   });
-  if(!session){
-    router.push("/auth/signin")
-  }
+  useEffect(() => {
+    if (!session) {
+      router.push("/auth/signin");
+    }
+  });
 
   // Loading animation...
   if (status === "loading") {

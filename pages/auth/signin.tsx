@@ -29,6 +29,7 @@ export default function Signin({ providers }:any) {
         width={600}
         objectFit="contain"
         className="animate-pulse"
+        alt=""
       />
       {Object.values(providers).map((provider :any) => (
         <div key={provider.name}>
