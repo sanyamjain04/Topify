@@ -12,7 +12,6 @@
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^1.0.5",
     "@tailwindcss/forms": "^0.5.3",
-    "better-react-spinkit": "^2.0.4",
     "next": "13.0.0",
     "next-auth": "^4.16.2",
     "react": "18.2.0",
