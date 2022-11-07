@@ -12,6 +12,7 @@ function Loader() {
             layout="fill"
             objectFit="contain"
             className="animate-pulse"
+            alt=""
           />
         </span>
         <PulseLoader color="#15883e" size={23} />

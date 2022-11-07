@@ -12,7 +12,7 @@ export default function Home() {
       router.push("/auth/signin");
     },
   });
-  if(session){
+  if(!session){
     router.push("/auth/signin")
   }
 
