@@ -8,17 +8,26 @@ import { FaMicrophoneAlt } from "react-icons/fa";
 import { RiCompassFill } from "react-icons/ri";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 function Sidebar() {
   const [selectedCategory, setSelectedCategory] = useState<string>("/");
+  const router = useRouter()
+
+  useEffect(() => {
+    setSelectedCategory(router.pathname)
+  
+    
+  }, [router.pathname])
+  
 
   const SidebarNav = [
     { route: "/", icon: <HomeIcon /> },
     { route: "", icon: <RiCompassFill /> },
     { route: "", icon: <FaMicrophoneAlt /> },
     { route: "", icon: <ChartBarIcon /> },
-    { route: "history", icon: <ClockIcon /> },
+    { route: "/history", icon: <ClockIcon /> },
     { route: "", icon: <DotsHorizontalIcon /> },
   ];
   return (

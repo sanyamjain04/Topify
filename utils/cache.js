@@ -4,6 +4,10 @@ class LRU {
     this.cache = new Map();
   }
 
+  get() {
+    return Array.from(this.cache.values());
+  }
+
   set(key, value) {
     if (this.cache.has(key)) {
       this.cache.delete(key);
@@ -17,12 +21,13 @@ class LRU {
     return this.cache.keys().next().value;
   }
 }
-const recentlyPlayedLRU = new LRU(20)
+const recentlyPlayedLRU = new LRU(25);
 
- const recentPlayedCache = (key, track) => {
-    recentlyPlayedLRU.set(key, track)
+const recentPlayedCache = (key, track) => {
+  recentlyPlayedLRU.set(key, track);
 
-    return Array.from(recentlyPlayedLRU.cache.values())
+  return Array.from(recentlyPlayedLRU.cache.values());
+};
 
-}
-export default recentPlayedCache
+export default recentPlayedCache;
+export { recentlyPlayedLRU };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, KeyboardEvent, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
   musicTrackState,
@@ -7,7 +7,7 @@ import {
   recentlyPlayedTracks,
 } from "../../atoms/playerAtom";
 import { Track as TrackType } from "../../types/body.types";
-import recentPlayedCache from "../../utils/cache";
+import recentPlayedCache, { recentlyPlayedLRU } from "../../utils/cache";
 import Track from "./Track";
 import Controls from "./Controls";
 import Player from "./Player";
@@ -25,10 +25,25 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(0.1);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
-  const isActive = true;
   const currentTrackKey = playingTrack?.key;
   const index = musicTracks.findIndex((track) => track.key === currentTrackKey);
 
+  // useEffect(() => {
+  //   const data = JSON.parse(localStorage.getItem("recentlyPlayed")!);
+  //   console.log(data);
+  //   data.forEach((track: TrackType) => {
+  //     recentlyPlayedLRU.set(track.key, track);
+  //     console.log(track.key);
+  //   });
+  //   setRecentlyPlayed(recentlyPlayedLRU.get());
+  // }, []);
+
+  useEffect(() => {
+    localStorage.removeItem("recentlyPlayed");
+    localStorage.setItem("recentlyPlayed", JSON.stringify(recentlyPlayed));
+    const data = JSON.parse(localStorage.getItem("recentlyPlayed")!);
+    console.log(data);
+  }, [recentlyPlayed]);
 
   const handlePlayPause = () => {
     setPlay(!play);

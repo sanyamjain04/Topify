@@ -23,20 +23,22 @@ function RecentlyPlayed({ track, chooseTrack, button }: RecentlyPlayedprops) {
 
   return (
     <div className="flex items-center space-x-3 px-2 py-1" onClick={handlePlay}>
-      <img
-        src={track.images.coverart}
-        alt=""
-        className="rounded-full w-[52px] h-[52px]"
-      />
-      <div className="flex-grow flex flex-col">
-        <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
-          {track.title}
-        </h4>
-        <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
-          {track.artists[0].alias.replace("-", " ")}
-        </p>
+      <div className="flex w-5/6 gap-3 items-center ">
+          <img
+            src={track.images.coverart}
+            alt=""
+            className="rounded-full w-[52px] h-[52px]"
+          />
+        <div className="flex-grow flex flex-col ">
+          <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
+            {track.title}
+          </h4>
+          <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
+            {track.artists[0].alias.replace("-", " ")}
+          </p>
+        </div>
       </div>
-      <div className={button ? "justify-self-end" : "hidden"}>
+      <div className={button ? "flex justify-end w-1/6" : "hidden"}>
         {track.url === playingTrack?.url && play ? (
           <>
             <div

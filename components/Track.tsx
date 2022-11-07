@@ -31,13 +31,16 @@ function Track({ track, chooseTrack }: TrackProps) {
   return (
     <div className="flex items-center justify-between space-x-20 cursor-default hover:bg-white/10 py-2 px-4 rounded-lg group transition ease-out">
       <div className="flex items-center gap-3">
-        <Image
-          src={track.images.coverart}
-          alt=""
-          className="rounded-xl h-12 w-12 object-cover mr-3"
-          width={48}
-          height={48}
-        />
+        <div className="relative w-12 h-12">
+          <Image
+            src={track.images.coverart}
+            alt=""
+            className="rounded-xl object-cover"
+            layout="fill"
+            // width={48}
+            // height={48}
+          />
+        </div>
         <div>
           <h4 className="text-white text-sm font-semibold truncate w-56 sm:w-[380px]">
             {track.title}

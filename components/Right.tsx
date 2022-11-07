@@ -15,8 +15,6 @@ interface RightProps {
 
 function Right({ chooseTrack, recentlyPlayed }: RightProps) {
   const { data: session } = useSession();
-  console.log(session);
-  
 
   return (
     <section className="p-4 space-y-8 hidden lg:block min-w-[280px]">
