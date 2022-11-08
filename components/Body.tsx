@@ -4,7 +4,8 @@ import { Track as TrackType } from "../types/body.types";
 import Poster from "./Poster";
 import Track from "./Track";
 import { useRecoilState } from "recoil";
-import { musicTrackState } from "../atoms/playerAtom";
+import { currentPlaylistState } from "../atoms/playerAtom";
+import {danceTracks, electronicTracks, hipPopTracks, houseTracks, musicTracksData, popTracks, rockTracks} from '../data'
 
 interface BodyProps {
   chooseTrack: (track: TrackType) => void;
@@ -13,25 +14,33 @@ interface BodyProps {
 const Body = ({ chooseTrack }: BodyProps) => {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchresults] = useState<string[]>([]);
-  const [musicTracks, setMusicTracks] =
-    useRecoilState<TrackType[]>(musicTrackState);
+  const [currentPlaylist, setCurrentPlaylist] = useRecoilState<TrackType[]>(currentPlaylistState);
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
+  const [showHomePlaylist, setShowHomePlaylist] = useState<TrackType[]>(musicTracksData)
 
-  const genres = [
-    "Classic",
-    "House",
-    "Electronic",
-    "Minimal",
-    "Chillout",
-    "Techno",
-    "Hip-hop",
-    "Blues",
-  ];
+  const genres = {
+     "House" : houseTracks ,
+     "Electronic" : electronicTracks ,
+     "Pop" : popTracks ,
+     "Rock" : rockTracks ,
+     "Dance" : danceTracks ,
+     "Hip-Hop" : hipPopTracks ,
+  };
 
+  useEffect(()=>{
+    if (selectedGenre in genres) {
+      // @ts-ignore
+      setShowHomePlaylist(genres[selectedGenre]);
+    }
+  },[selectedGenre])
+
+
+  // if you want to fetch data from Api then uncomment the useEffect below
   // useEffect(() => {
   //   const options = {
   //     method: "GET",
   //     headers: {
-  //       "X-RapidAPI-Key": "2e445e07b9mshede7d00d0b93695p127d1ajsn6e681578ac80",
+  // "X-RapidAPI-Key": process.env.NEXT_APP_RAPID_API_KEY,
   //       "X-RapidAPI-Host": "shazam-core.p.rapidapi.com",
   //     },
   //   };
@@ -44,16 +53,26 @@ const Body = ({ chooseTrack }: BodyProps) => {
   // }, []);
   // console.log(music);
 
+  // function selectGenre(genre: any) {
+  //   setCurrentPlaylist(genre.playList);
+  //   setSelectedGenre(genre.name);
+  // }
+
+  const handleTrack = (track :TrackType) => {
+    setCurrentPlaylist(showHomePlaylist)
+    chooseTrack(track)
+  }
+
   return (
-    <section className="bg-black ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:w-[calc(100vw-110px)] md:max-w-6xl">
-      <Search search={search} setSearch={setSearch} />
+    <section className="bg-black ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
+      <Search search={search} setSearch={setSearch} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
       <div>
         <div className="flex flex-wrap gap-x-5 scrollbar-hide py-0 ml-2 w-full h-full">
           {search.length === 0
-            ? musicTracks
+            ? showHomePlaylist
                 .slice(0, 4)
                 .map((track, i) => (
-                  <Poster key={i} track={track} chooseTrack={chooseTrack} />
+                  <Poster key={i} track={track} chooseTrack={handleTrack} />
                 ))
             : "Loading"}
         </div>
@@ -64,8 +83,14 @@ const Body = ({ chooseTrack }: BodyProps) => {
         <div className="hidden lg:inline max-w-[270px]">
           <h2 className="text-white font-bold mb-3">Genres</h2>
           <div className="flex gap-x-2 gap-y-2.5 flex-wrap mb-3">
-            {genres.map((genre, i) => (
-              <div key={i} className="genre">
+            {Object.keys(genres).map((genre, i) => (
+              <div
+                key={i}
+                className={`genre ${
+                  genre === selectedGenre && "text-green-500"
+                }`}
+                onClick={() => setSelectedGenre(genre)}
+              >
                 {genre}
               </div>
             ))}
@@ -81,9 +106,11 @@ const Body = ({ chooseTrack }: BodyProps) => {
           </h2>
 
           <div className="border-2 border-[#262626] rounded-2xl overflow-y-scroll scrollbarThin h-[370px]">
-            {musicTracks.slice(4, musicTracks.length).map((track, i) => (
-              <Track key={i} track={track} chooseTrack={chooseTrack} />
-            ))}
+            {showHomePlaylist
+              .slice(4, showHomePlaylist.length)
+              .map((track, i) => (
+                <Track key={i} track={track} chooseTrack={handleTrack} />
+              ))}
           </div>
           <div className="h-20" />
         </div>

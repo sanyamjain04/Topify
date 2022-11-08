@@ -31,7 +31,6 @@ export default function Home() {
     if (data) {
       data.forEach((track: Track) => {
         recentlyPlayedLRU.set(track.key, track);
-        console.log(track.key);
       });
       setRecentlyPlayed(recentlyPlayedLRU.get());
     }

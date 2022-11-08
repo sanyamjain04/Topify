@@ -17,7 +17,7 @@ function Right({ chooseTrack, recentlyPlayed }: RightProps) {
   const { data: session } = useSession();
 
   return (
-    <section className="p-4 space-y-8 hidden lg:block min-w-[280px]">
+    <section className="p-4 space-y-8 hidden lg:block min-w-[280px] w-1/5">
       <div className="flex space-x-2 items-center justify-between">
         {/* Icons */}
         <div className="flex items-center space-x-4 border-2 border-[#262626] rounded-full h-12 py-3 px-4">

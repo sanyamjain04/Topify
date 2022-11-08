@@ -15,7 +15,7 @@ interface ControlProps {
   shuffle: boolean;
   setShuffle: Dispatch<SetStateAction<boolean>>;
   setRepeat: Dispatch<SetStateAction<boolean>>;
-  musicTracks: Track[];
+  currentPlaylist: Track[];
   handlePlayPause: () => void;
   handlePrevSong: () => void;
   handleNextSong: () => void;
@@ -27,7 +27,7 @@ const Controls = ({
   setRepeat,
   shuffle,
   setShuffle,
-  musicTracks,
+  currentPlaylist,
   handlePlayPause,
   handlePrevSong,
   handleNextSong,
@@ -50,7 +50,7 @@ const Controls = ({
         onClick={handleRepeat}
         className="hidden sm:block cursor-pointer"
       />
-      {musicTracks?.length && (
+      {currentPlaylist?.length && (
         <MdSkipPrevious
           size={30}
           color="#FFF"
@@ -73,7 +73,7 @@ const Controls = ({
           className="cursor-pointer"
         />
       )}
-      {musicTracks?.length && (
+      {currentPlaylist?.length && (
         <MdSkipNext
           size={30}
           color="#FFF"

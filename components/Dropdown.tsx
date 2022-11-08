@@ -12,11 +12,12 @@ export default function Dropdown() {
       <div className="w-full absolute right-1 group">
         <Menu.Button className="flex items-center w-full px-4 py-3 text-sm font-medium text-white bg-[#1A1A1A] rounded-full hover:bg-[#3E3E3E]">
           <ChevronDownIcon className="h-6 text-[#686868]" aria-hidden="true" />
-          <img
-            src={session!.user.image}
-            alt=""
-            className="rounded-full w-11 h-11 absolute -right-1 object-cover"
-          />
+            <img
+              src={session!.user.image}
+              alt=""
+              referrerPolicy="no-referrer"
+              className="rounded-full w-11 h-11 absolute -right-1 object-cover"
+            />
         </Menu.Button>
       </div>
       <Transition

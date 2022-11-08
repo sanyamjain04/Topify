@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import { Track } from "../types/body.types";
-import { musicTracksData } from '../data/musicTracks'
+import musicTracksData  from '../data/musicTracks.json'
 
 export const playState = atom({
   key: "1",
@@ -12,7 +12,7 @@ export const playingTrackState = atom<Track>({
   default: undefined,
 });
 
-export const musicTrackState = atom<Track[]>({
+export const currentPlaylistState = atom<Track[]>({
   key: "3",
   default: [...musicTracksData]
 });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
-  musicTrackState,
+  currentPlaylistState,
   playingTrackState,
   playState,
   recentlyPlayedTracks,
@@ -18,7 +18,7 @@ const MusicPlayer = () => {
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
   const [recentlyPlayed, setRecentlyPlayed] = useRecoilState(recentlyPlayedTracks);
-  const [musicTracks, setmusicTracks] = useRecoilState(musicTrackState);
+  const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
   const [duration, setDuration] = useState(0);
   const [seekTime, setSeekTime] = useState(0);
   const [appTime, setAppTime] = useState(0);
@@ -26,13 +26,11 @@ const MusicPlayer = () => {
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const currentTrackKey = playingTrack?.key;
-  const index = musicTracks.findIndex((track) => track.key === currentTrackKey);
+  const index = currentPlaylist.findIndex((track: TrackType) => track.key === currentTrackKey);
 
   useEffect(() => {
     localStorage.removeItem("recentlyPlayed");
     localStorage.setItem("recentlyPlayed", JSON.stringify(recentlyPlayed));
-    const data = JSON.parse(localStorage.getItem("recentlyPlayed")!);
-    console.log(data);
   }, [recentlyPlayed]);
 
   const handlePlayPause = () => {
@@ -47,19 +45,19 @@ const MusicPlayer = () => {
 
   const handleNextSong = () => {
     if (shuffle) {
-      chooseTrack(musicTracks[Math.floor(Math.random() * musicTracks.length)]);
+      chooseTrack(currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)]);
     } else if (repeat) {
       chooseTrack(playingTrack);
     } else {
       const nextTrack =
-        musicTracks[index === musicTracks.length - 1 ? 0 : index + 1];
+        currentPlaylist[index === currentPlaylist.length - 1 ? 0 : index + 1];
       chooseTrack(nextTrack);
     }
   };
 
   const handlePrevSong = () => {
     const nextTrack =
-      musicTracks[index === 0 ? musicTracks.length - 1 : index - 1];
+      currentPlaylist[index === 0 ? currentPlaylist.length - 1 : index - 1];
     chooseTrack(nextTrack);
   };
 
@@ -73,7 +71,7 @@ const MusicPlayer = () => {
           setRepeat={setRepeat}
           shuffle={shuffle}
           setShuffle={setShuffle}
-          musicTracks={musicTracks}
+          currentPlaylist={currentPlaylist}
           handlePlayPause={handlePlayPause}
           handlePrevSong={handlePrevSong}
           handleNextSong={handleNextSong}

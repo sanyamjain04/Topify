@@ -31,7 +31,7 @@ function Sidebar() {
     { route: "", icon: <DotsHorizontalIcon /> },
   ];
   return (
-    <section className="hidden fixed sm:flex flex-col p-4 items-center bg-black w-[90px] h-screen space-y-8 md:border-r-2">
+    <section className="hidden fixed sm:flex flex-col z-50 p-4 items-center bg-black w-[90px] h-screen space-y-8 md:border-r-2">
       <Link href="/">
         <Image
           src="https://rb.gy/xkacau"

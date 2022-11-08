@@ -16,7 +16,7 @@ function RecentlyPlayed({ track, chooseTrack, button }: RecentlyPlayedprops) {
   const handlePlay = () => {
     chooseTrack(track);
 
-    if (track.url === playingTrack.url) {
+    if (track.url === playingTrack?.url) {
       setPlay(!play);
     }
   };
@@ -24,17 +24,17 @@ function RecentlyPlayed({ track, chooseTrack, button }: RecentlyPlayedprops) {
   return (
     <div className="flex items-center space-x-3 px-2 py-1" onClick={handlePlay}>
       <div className="flex w-5/6 gap-3 items-center ">
-          <img
-            src={track.images.coverart}
-            alt=""
-            className="rounded-full w-[52px] h-[52px]"
-          />
+        <img
+          src={track.images.coverart}
+          alt=""
+          className="rounded-full w-[52px] h-[52px]"
+        />
         <div className="flex-grow flex flex-col ">
           <h4 className="text-white text-[13px] mb-0.5 font-semibold hover:underline cursor-pointer truncate max-w-[150px]">
             {track.title}
           </h4>
-          <p className="text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
-            {track.artists[0].alias.replace("-", " ")}
+          <p className="truncate text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
+            {track.artists[0].alias.replace("-", " ").slice(0, 15)}
           </p>
         </div>
       </div>
