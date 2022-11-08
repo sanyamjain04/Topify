@@ -21,3 +21,8 @@ export const recentlyPlayedTracks = atom<Track[]>({
   key: "4",
   default: [],
 });
+
+export const likeTracksState = atom<Track[]>({
+  key: "5",
+  default: [],
+});

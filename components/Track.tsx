@@ -1,8 +1,12 @@
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { playingTrackState, playState } from "../atoms/playerAtom";
+import {
+  likeTracksState,
+  playingTrackState,
+  playState,
+} from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
 import Image from "next/legacy/image";
 
@@ -12,10 +16,19 @@ interface TrackProps {
 }
 
 function Track({ track, chooseTrack }: TrackProps) {
+
   const [hasLiked, setHasLiked] = useState<boolean>(false);
   const [play, setPlay] = useRecoilState<boolean>(playState);
-  const [playingTrack, setPlayingTrack] =
-    useRecoilState<Track>(playingTrackState);
+  const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
+  const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
+  const index = likedTracks.findIndex(
+    (tracks: Track) => tracks.key === track.key
+  );
+  useEffect(()=>{
+
+    let liked = index !== -1 ? true : false
+    setHasLiked(liked)
+  },[index])
 
   const handlePlay = () => {
     chooseTrack(track);
@@ -28,6 +41,17 @@ function Track({ track, chooseTrack }: TrackProps) {
     }
   };
 
+  function handleLike() {
+    if (index == -1) {
+      setLikedTracks([...likedTracks, track]);
+      setHasLiked(true);
+    } else {
+      const newAraay = likedTracks.filter((el:Track) => el.key !== track.key) 
+      setLikedTracks(newAraay)
+      setHasLiked(false);
+    }
+  }
+
   return (
     <div className="flex items-center justify-between space-x-20 cursor-default hover:bg-white/10 py-2 px-4 rounded-lg group transition ease-out">
       <div className="flex items-center gap-3">
@@ -37,8 +61,6 @@ function Track({ track, chooseTrack }: TrackProps) {
             alt=""
             className="rounded-xl object-cover"
             layout="fill"
-            // width={48}
-            // height={48}
           />
         </div>
         <div>
@@ -57,7 +79,7 @@ function Track({ track, chooseTrack }: TrackProps) {
             className={`text-xl ml-3 icon ${
               hasLiked ? "text-[#1ED760]" : "text-[#868686]"
             }`}
-            onClick={() => setHasLiked(!hasLiked)}
+            onClick={handleLike}
           />
           {track.url === playingTrack?.url && play ? (
             <>

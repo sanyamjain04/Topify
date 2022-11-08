@@ -1,5 +1,9 @@
 import { useRecoilState } from "recoil";
-import { playingTrackState, playState, recentlyPlayedTracks } from "../atoms/playerAtom";
+import {
+  playingTrackState,
+  playState,
+  recentlyPlayedTracks,
+} from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
 import Body from "./Body";
 import Right from "./Right";
@@ -15,13 +19,13 @@ const Dashboard = () => {
     setRecentlyPlayed([...cachedData]);
 
     setPlayingTrack(track);
-    if(!play) setPlay(!play)
+    if (!play) setPlay(!play);
   };
 
   return (
     <>
       <Body chooseTrack={chooseTrack} />
-      <Right chooseTrack={chooseTrack} recentlyPlayed={recentlyPlayed} />     
+      <Right chooseTrack={chooseTrack} recentlyPlayed={recentlyPlayed} />
     </>
   );
 };
