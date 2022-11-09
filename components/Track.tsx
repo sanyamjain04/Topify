@@ -30,6 +30,11 @@ function Track({ track, chooseTrack }: TrackProps) {
     setHasLiked(liked)
   },[index])
 
+  useEffect(()=>{
+    localStorage.removeItem("likedPlaylist")
+    localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks))
+  },[index])
+
   const handlePlay = () => {
     chooseTrack(track);
     if (!playingTrack || track.url === playingTrack.url) {

@@ -11,8 +11,7 @@ interface PosterProps {
 
 function Poster({ track, chooseTrack }: PosterProps) {
   const [play, setPlay] = useRecoilState<boolean>(playState);
-  const [playingTrack, setPlayingTrack] =
-    useRecoilState<Track>(playingTrackState);
+  const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
 
   const handlePlay = () => {
     chooseTrack(track);
@@ -40,7 +39,7 @@ function Poster({ track, chooseTrack }: PosterProps) {
         draggable="false"
       />
 
-      <div className="absolute bottom-4 inset-x-0 ml-4 flex items-center space-x-3.5">
+      <div className="absolute bottom-4 inset-x-0 ml-1 flex items-center space-x-2">
         <div className="h-10 w-10 bg-[#15883e] rounded-full flex items-center justify-center group-hover:bg-[#1db954] flex-shrink-0">
           {track.url === playingTrack?.url && play ? (
             <BsFillPauseFill className="text-white text-xl" />
@@ -50,7 +49,7 @@ function Poster({ track, chooseTrack }: PosterProps) {
         </div>
 
         <div className="text-[15px]">
-          <h4 className="font-bold truncate w-44">{track.title}</h4>
+          <h4 className="font-bold truncate w-40">{track.title}</h4>
           <h6 className="capitalize">
             {track.artists[0].alias.replace("-", " ")}
           </h6>

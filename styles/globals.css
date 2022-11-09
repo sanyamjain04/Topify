@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-black scrollbar-hide tracking-wider;
+    @apply bg-black scrollbar-hide tracking-wider text-white;
   }
 }
 
@@ -34,6 +34,6 @@
   }
 
   .scrollbarThin {
-    @apply scrollbar-thin scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500
+    @apply scrollbar-thin !scrollbar-thumb-gray-600 scrollbar-thumb-rounded hover:scrollbar-thumb-gray-500
   }
 }

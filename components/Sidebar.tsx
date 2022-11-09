@@ -26,7 +26,7 @@ function Sidebar() {
     { route: "/", icon: <HomeIcon /> },
     { route: "", icon: <RiCompassFill /> },
     { route: "", icon: <FaMicrophoneAlt /> },
-    { route: "", icon: <ChartBarIcon /> },
+    { route: "/playlist", icon: <ChartBarIcon /> },
     { route: "/history", icon: <ClockIcon /> },
     { route: "", icon: <DotsHorizontalIcon /> },
   ];

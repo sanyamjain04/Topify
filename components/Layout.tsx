@@ -1,15 +1,14 @@
 import MusicPlayer from "./musicplayer/index";
-import { playingTrackState } from "../atoms/playerAtom";
+import { likeTracksState, playingTrackState } from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
 import { useRecoilState } from "recoil";
-import React, { ReactNode } from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 
 const Layout = ({ children }: any) => {
   const router = useRouter();
-  const [playingTrack, setPlayingTrack] =
-    useRecoilState<Track>(playingTrackState);
+  const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
 
   if (router.pathname === "/auth/signin") return children;
 
