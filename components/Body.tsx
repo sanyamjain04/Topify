@@ -1,12 +1,10 @@
 import Search from "./Search";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Track as TrackType } from "../types/body.types";
 import Poster from "./Poster";
 import Track from "./Track";
-import { useRecoilState } from "recoil";
-import { currentPlaylistState } from "../atoms/playerAtom";
 import {danceTracks, electronicTracks, hipPopTracks, houseTracks, musicTracksData, popTracks, rockTracks} from '../data'
-import TrackContext from "../hooks/trackContext";
+import Link from "next/link";
 
 const Body = () => {
   const [search, setSearch] = useState<string>("");
@@ -55,7 +53,7 @@ const Body = () => {
   // }
 
   return (
-    <section className="bg-black ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
+    <section className="bg-black w-screen ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
       <Search search={search} setSearch={setSearch} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
       <div>
         <div className="flex flex-wrap gap-x-5 scrollbar-hide py-0 ml-2 w-full h-full">
@@ -86,9 +84,12 @@ const Body = () => {
               </div>
             ))}
           </div>
-          <button className="whitespace-nowrap   text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out">
-            All Genres
-          </button>
+          <Link href={'/explore'}>
+            <button className="whitespace-nowrap text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out"
+            >
+              All Genres
+            </button>
+          </Link>
         </div>
 
         <div className="pr-2 w-full">

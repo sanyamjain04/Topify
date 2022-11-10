@@ -29,7 +29,7 @@ function Poster({ track, playlist }: PosterProps) {
 
   return (
     <div
-      className="w-[160px] h-[200px] rounded-[50px] overflow-hidden relative text-white/80 cursor-pointer hover:scale-105 hover:text-white/100 transition duration-200 ease-out group"
+      className="w-[90px] h-[142px] sm:w-[160px] sm:h-[200px] rounded-[50px] overflow-hidden relative text-white/80 cursor-pointer hover:scale-105 hover:text-white/100 transition duration-200 ease-out group"
         onClick={handlePlay}
     >
       <Image
@@ -43,7 +43,7 @@ function Poster({ track, playlist }: PosterProps) {
       />
 
       <div className="absolute bottom-4 inset-x-0 ml-1 flex items-center space-x-2">
-        <div className="h-10 w-10 bg-[#15883e] rounded-full flex items-center justify-center group-hover:bg-[#1db954] flex-shrink-0">
+        <div className="w-4 h-4 sm:h-10 sm:w-10 bg-[#15883e] rounded-full flex items-center justify-center group-hover:bg-[#1db954] flex-shrink-0">
           {track.url === playingTrack?.url && play ? (
             <BsFillPauseFill className="text-white text-xl" />
           ) : (
@@ -51,9 +51,9 @@ function Poster({ track, playlist }: PosterProps) {
           )}
         </div>
 
-        <div className="text-[15px]">
+        <div className="text-[10px] sm:text-[15px]">
           <h4 className="font-bold truncate w-40">{track.title}</h4>
-          <h6 className="capitalize">
+          <h6 className="capitalize truncate">
             {track.artists[0].alias.replace("-", " ")}
           </h6>
         </div>

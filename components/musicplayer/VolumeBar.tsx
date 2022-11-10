@@ -14,7 +14,7 @@ const VolumeBar = ({ value, min, max, onChange, setVolume }:VolumeProps) => (
   <div className="hidden lg:flex flex-1 items-center justify-end">
     {value <= 1 && value > 0.5 && <BsFillVolumeUpFill  className='hover:bg-[#282727]' size={25} color="#FFF" onClick={() => setVolume(0)} />}
     {value <= 0.5 && value > 0 && <BsVolumeDownFill className='hover:bg-[#282727]' size={25} color="#FFF" onClick={() => setVolume(0)} />}
-    {value === 0 && <BsFillVolumeMuteFill className='hover:bg-[#282727]' size={25} color="#FFF" onClick={() => setVolume(1)} />}
+    {value < 0.01 && <BsFillVolumeMuteFill className='hover:bg-[#282727]' size={25} color="#FFF" onClick={() => setVolume(1)} />}
     <input
       type="range"
       step="any"

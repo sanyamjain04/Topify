@@ -1,3 +1,4 @@
+import hotkeys from 'hotkeys-js';
 import React, { useState, useEffect, useContext } from "react";
 import { useRecoilState } from "recoil";
 import {
@@ -39,8 +40,7 @@ const MusicPlayer = () => {
     setPlay(!play);
   };
 
-
-  const handleNextSong = () => {
+    const handleNextSong = () => {
     if (shuffle) {
       chooseTrack(currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)], currentPlaylist);
     } else if (repeat) {

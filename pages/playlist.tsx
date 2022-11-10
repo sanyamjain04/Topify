@@ -6,8 +6,7 @@ import { Track } from "../types/body.types";
 import Head from "next/head";
 
 const Playlist = () => {
-  const [likedTracks, setLikedTracks] =
-    useRecoilState<Track[]>(likeTracksState);
+  const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
 
   useEffect(() => {
     setLikedTracks(JSON.parse(localStorage.getItem("likedPlaylist")!));
@@ -18,6 +17,7 @@ const Playlist = () => {
       <Head>
         <title>Spotify - Playlist</title>
       </Head>
+
       <section className="sm:ml-24 p-2 w-full">
         <div className="flex flex-col w-full">
           {likedTracks && (

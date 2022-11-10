@@ -36,7 +36,7 @@ export default function History() {
                 <RecentlyPlayed
                   key={i}
                   track={track}
-                  chooseTrack={chooseTrack}
+                  playlist={recentlyPlayed}
                   button={true}
                 />
               ))}

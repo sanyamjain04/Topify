@@ -22,7 +22,7 @@ function Sidebar() {
 
   const SidebarNav = [
     { route: "/", icon: <HomeIcon /> },
-    { route: "", icon: <RiCompassFill /> },
+    { route: "/explore", icon: <RiCompassFill /> },
     { route: "", icon: <FaMicrophoneAlt /> },
     { route: "/playlist", icon: <ChartBarIcon /> },
     { route: "/history", icon: <ClockIcon /> },

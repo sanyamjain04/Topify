@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import { useEffect } from "react";
 import Loader from "../../components/Loader";
 
-export default function Signin({ providers }:any) {
+export default function Signin({ providers }: any) {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -13,7 +13,7 @@ export default function Signin({ providers }:any) {
     if (session) {
       router.push("/");
     }
-  }, [session]);
+  }, [session, router]);
 
   if (session) return <Loader />;
 
@@ -31,7 +31,7 @@ export default function Signin({ providers }:any) {
         className="animate-pulse"
         alt=""
       />
-      {Object.values(providers).map((provider :any) => (
+      {Object.values(providers).map((provider: any) => (
         <div key={provider.name}>
           <button
             className="text-white py-4 px-6 rounded-full bg-[#1db954] transition duration-300 ease-out border border-transparent uppercase font-bold text-xs md:text-base tracking-wider hover:scale-105 hover:bg-[#0db146]"
@@ -44,7 +44,6 @@ export default function Signin({ providers }:any) {
     </div>
   );
 }
-
 
 export async function getServerSideProps() {
   const providers = await getProviders();
