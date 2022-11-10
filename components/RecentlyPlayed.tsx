@@ -1,20 +1,23 @@
+import { useContext } from "react";
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
+import TrackContext from "../hooks/trackContext";
 import { Track } from "../types/body.types";
 
 interface RecentlyPlayedprops {
   track: Track;
-  chooseTrack: (track: Track) => void;
   button: boolean;
+  playlist: Track[];
 }
 
-function RecentlyPlayed({ track, chooseTrack, button }: RecentlyPlayedprops) {
+function RecentlyPlayed({ track, playlist, button }: RecentlyPlayedprops) {
   const [play, setPlay] = useRecoilState(playState);
-  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+  const playingTrack = useRecoilValue(playingTrackState);
+  const { chooseTrack } = useContext(TrackContext);
 
   const handlePlay = () => {
-    chooseTrack(track);
+    chooseTrack(track, playlist);
 
     if (track.url === playingTrack?.url) {
       setPlay(!play);

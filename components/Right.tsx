@@ -5,16 +5,13 @@ import { ViewGridIcon } from "@heroicons/react/solid";
 import { Track } from "../types/body.types";
 import RecentlyPlayed from "./RecentlyPlayed";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import Dropdown from "./Dropdown";
 
 interface RightProps {
-  chooseTrack: (track: Track) => void;
   recentlyPlayed: Track[];
 }
 
-function Right({ chooseTrack, recentlyPlayed }: RightProps) {
-  const { data: session } = useSession();
+function Right({ recentlyPlayed }: RightProps) {
 
   return (
     <section className="p-4 space-y-8 hidden lg:block min-w-[280px] w-1/5">
@@ -46,8 +43,8 @@ function Right({ chooseTrack, recentlyPlayed }: RightProps) {
               <RecentlyPlayed
                 key={i}
                 track={track}
-                chooseTrack={chooseTrack}
                 button={false}
+                playlist={recentlyPlayed}
               />
             ))}
           </div>

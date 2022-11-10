@@ -78,3 +78,8 @@ interface Share {
   avatar?: string;
   snapchat: string;
 }
+
+export type chooseTrackProps = {
+  track: Track
+  playlist: Track[]
+}

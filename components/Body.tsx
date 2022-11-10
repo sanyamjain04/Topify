@@ -1,20 +1,16 @@
 import Search from "./Search";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Track as TrackType } from "../types/body.types";
 import Poster from "./Poster";
 import Track from "./Track";
 import { useRecoilState } from "recoil";
 import { currentPlaylistState } from "../atoms/playerAtom";
 import {danceTracks, electronicTracks, hipPopTracks, houseTracks, musicTracksData, popTracks, rockTracks} from '../data'
+import TrackContext from "../hooks/trackContext";
 
-interface BodyProps {
-  chooseTrack: (track: TrackType) => void;
-}
-
-const Body = ({ chooseTrack }: BodyProps) => {
+const Body = () => {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchresults] = useState<string[]>([]);
-  const [currentPlaylist, setCurrentPlaylist] = useRecoilState<TrackType[]>(currentPlaylistState);
   const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [showHomePlaylist, setShowHomePlaylist] = useState<TrackType[]>(musicTracksData)
 
@@ -58,11 +54,6 @@ const Body = ({ chooseTrack }: BodyProps) => {
   //   setSelectedGenre(genre.name);
   // }
 
-  const handleTrack = (track :TrackType) => {
-    setCurrentPlaylist(showHomePlaylist)
-    chooseTrack(track)
-  }
-
   return (
     <section className="bg-black ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
       <Search search={search} setSearch={setSearch} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
@@ -72,7 +63,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
             ? showHomePlaylist
                 .slice(0, 4)
                 .map((track, i) => (
-                  <Poster key={i} track={track} chooseTrack={handleTrack} />
+                  <Poster key={i} track={track} playlist={showHomePlaylist} />
                 ))
             : "Loading"}
         </div>
@@ -109,7 +100,7 @@ const Body = ({ chooseTrack }: BodyProps) => {
             {showHomePlaylist
               .slice(4, showHomePlaylist.length)
               .map((track, i) => (
-                <Track key={i} track={track} chooseTrack={handleTrack} />
+                <Track key={i} track={track} playlist={showHomePlaylist} />
               ))}
           </div>
           <div className="h-20" />

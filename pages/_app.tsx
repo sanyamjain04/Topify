@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import type { Session } from "next-auth";
 import Layout from "../components/Layout";
+import { TrackProvider } from "../hooks/trackContext";
 
 export default function App({
   Component,
@@ -12,9 +13,11 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <RecoilRoot>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <TrackProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </TrackProvider>
       </RecoilRoot>
     </SessionProvider>
   );

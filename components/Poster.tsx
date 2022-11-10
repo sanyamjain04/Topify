@@ -1,20 +1,23 @@
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import { Track } from "../types/body.types";
+import { chooseTrackProps, Track } from "../types/body.types";
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
 import Image from "next/legacy/image";
+import TrackContext from "../hooks/trackContext";
+import { useContext } from "react";
 
 interface PosterProps {
     track : Track
-    chooseTrack : (track : Track) => void
+    playlist : Track[]
 }
 
-function Poster({ track, chooseTrack }: PosterProps) {
+function Poster({ track, playlist }: PosterProps) {
   const [play, setPlay] = useRecoilState<boolean>(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
+  const {chooseTrack} = useContext(TrackContext)
 
   const handlePlay = () => {
-    chooseTrack(track);
+    chooseTrack(track, playlist );
     if(!playingTrack){
         setPlay(!play)
     }

@@ -1,7 +1,7 @@
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useContext, useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   likeTracksState,
   playingTrackState,
@@ -9,34 +9,35 @@ import {
 } from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
 import Image from "next/legacy/image";
+import TrackContext from "../hooks/trackContext";
 
 interface TrackProps {
   track: Track;
-  chooseTrack: (track: Track) => void;
+  playlist: Track[];
 }
 
-function Track({ track, chooseTrack }: TrackProps) {
-
+function Track({ track, playlist }: TrackProps) {
   const [hasLiked, setHasLiked] = useState<boolean>(false);
   const [play, setPlay] = useRecoilState<boolean>(playState);
-  const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
+  const playingTrack = useRecoilValue<Track>(playingTrackState);
   const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
+  const { chooseTrack } = useContext(TrackContext);
+
   const index = likedTracks.findIndex(
     (tracks: Track) => tracks.key === track.key
   );
-  useEffect(()=>{
+  useEffect(() => {
+    let liked = index !== -1 ? true : false;
+    setHasLiked(liked);
+  }, [index]);
 
-    let liked = index !== -1 ? true : false
-    setHasLiked(liked)
-  },[index])
-
-  useEffect(()=>{
-    localStorage.removeItem("likedPlaylist")
-    localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks))
-  },[index])
+  useEffect(() => {
+    localStorage.removeItem("likedPlaylist");
+    localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks));
+  }, [index]);
 
   const handlePlay = () => {
-    chooseTrack(track);
+    chooseTrack(track, playlist);
     if (!playingTrack || track.url === playingTrack.url) {
       setPlay(!play);
     }
@@ -51,8 +52,8 @@ function Track({ track, chooseTrack }: TrackProps) {
       setLikedTracks([...likedTracks, track]);
       setHasLiked(true);
     } else {
-      const newAraay = likedTracks.filter((el:Track) => el.key !== track.key) 
-      setLikedTracks(newAraay)
+      const newAraay = likedTracks.filter((el: Track) => el.key !== track.key);
+      setLikedTracks(newAraay);
       setHasLiked(false);
     }
   }

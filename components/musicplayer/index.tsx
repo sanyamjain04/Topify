@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRecoilState } from "recoil";
 import {
   currentPlaylistState,
@@ -7,12 +7,12 @@ import {
   recentlyPlayedTracks,
 } from "../../atoms/playerAtom";
 import { Track as TrackType } from "../../types/body.types";
-import recentPlayedCache from "../../utils/cache";
 import Track from "./Track";
 import Controls from "./Controls";
 import Player from "./Player";
 import Seekbar from "./Seekbar";
 import VolumeBar from "./VolumeBar";
+import TrackContext from "../../hooks/trackContext";
 
 const MusicPlayer = () => {
   const [play, setPlay] = useRecoilState(playState);
@@ -25,6 +25,8 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(0.1);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+  const {chooseTrack} = useContext(TrackContext)
+  
   const currentTrackKey = playingTrack?.key;
   const index = currentPlaylist.findIndex((track: TrackType) => track.key === currentTrackKey);
 
@@ -37,28 +39,23 @@ const MusicPlayer = () => {
     setPlay(!play);
   };
 
-  const chooseTrack = (track: TrackType) => {
-    const cachedData = recentPlayedCache(track.key, track);
-    setRecentlyPlayed([...cachedData]);
-    setPlayingTrack(track);
-  };
 
   const handleNextSong = () => {
     if (shuffle) {
-      chooseTrack(currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)]);
+      chooseTrack(currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)], currentPlaylist);
     } else if (repeat) {
-      chooseTrack(playingTrack);
+      chooseTrack(playingTrack, currentPlaylist);
     } else {
       const nextTrack =
         currentPlaylist[index === currentPlaylist.length - 1 ? 0 : index + 1];
-      chooseTrack(nextTrack);
+      chooseTrack(nextTrack, currentPlaylist);
     }
   };
 
   const handlePrevSong = () => {
     const nextTrack =
       currentPlaylist[index === 0 ? currentPlaylist.length - 1 : index - 1];
-    chooseTrack(nextTrack);
+    chooseTrack(nextTrack,currentPlaylist);
   };
 
   return (

@@ -17,8 +17,6 @@ function Sidebar() {
 
   useEffect(() => {
     setSelectedCategory(router.pathname)
-  
-    
   }, [router.pathname])
   
 
