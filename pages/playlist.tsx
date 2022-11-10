@@ -5,7 +5,7 @@ import Poster from "../components/Poster";
 import { Track } from "../types/body.types";
 import Head from "next/head";
 
-const playlist = () => {
+const Playlist = () => {
   const [likedTracks, setLikedTracks] =
     useRecoilState<Track[]>(likeTracksState);
 
@@ -38,4 +38,4 @@ const playlist = () => {
   );
 };
 
-export default playlist;
+export default Playlist;
