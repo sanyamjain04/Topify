@@ -15,8 +15,9 @@ type ReorderProps = (
 ) => Track[];
 
 const Layout = ({ children }: any) => {
+  const playingTrack = useRecoilValue<Track>(playingTrackState);
+  const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
   const router = useRouter();
-  if (router.pathname === "/auth/signin") return children;
   
   const { status, data: session } = useSession({
     required: true,
@@ -24,9 +25,8 @@ const Layout = ({ children }: any) => {
       router.push("/auth/signin");
     },
   });
+  if (router.pathname === "/auth/signin") return children;
 
-  const playingTrack = useRecoilValue<Track>(playingTrackState);
-  const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
 
   const reorder: ReorderProps = (list, startIndex, endIndex) => {
     const result = Array.from(list);
