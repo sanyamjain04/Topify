@@ -23,7 +23,7 @@ function Track({ track, playlist }: TrackProps) {
   const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
   const { chooseTrack } = useContext(TrackContext);
 
-  const index = likedTracks.findIndex(
+  const index = likedTracks?.findIndex(
     (tracks: Track) => tracks.key === track.key
   );
   useEffect(() => {

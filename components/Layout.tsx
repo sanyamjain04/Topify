@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { useSession } from "next-auth/react";
 
 type ReorderProps = (
   list: Track[],
@@ -15,10 +16,18 @@ type ReorderProps = (
 
 const Layout = ({ children }: any) => {
   const router = useRouter();
+  if (router.pathname === "/auth/signin") return children;
+  
+  const { status, data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/auth/signin");
+    },
+  });
+
   const playingTrack = useRecoilValue<Track>(playingTrackState);
   const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
 
-  if (router.pathname === "/auth/signin") return children;
   const reorder: ReorderProps = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);

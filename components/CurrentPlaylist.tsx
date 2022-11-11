@@ -30,6 +30,7 @@ const CurrentPlaylistPlayer = () => {
                   )}
                 </Draggable>
               ))}
+              {provided.placeholder}
             </div>
           )}
         </Droppable>
