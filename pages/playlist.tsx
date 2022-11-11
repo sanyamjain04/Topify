@@ -22,7 +22,7 @@ const Playlist = () => {
         <div className="flex flex-col w-full">
           {likedTracks && (
             <>
-              <h1 className="p-2">Liked Playlist</h1>
+              <h1 className="p-2">Liked Playlist </h1>
               <div className="m- overflow-y-scroll scrollbarThin">
                 <div className="flex gap-3 p-1 h-[220px] min-w-max">
                   {likedTracks.map((track: Track, i: number) => (

@@ -79,7 +79,8 @@ interface Share {
   snapchat: string;
 }
 
-export type chooseTrackProps = {
-  track: Track
-  playlist: Track[]
+export interface ReorderProps {
+  list : any
+  startIndex: number
+  endIndex: number
 }

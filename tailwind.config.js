@@ -28,7 +28,7 @@ module.exports = {
       body: ["Ubuntu", "serif"],
       sans: ["ui-sans-serif", "system-ui"],
     },
-  },
+  },  
   variants: {
     extend: {},
     scrollbar: ["rounded"],

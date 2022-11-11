@@ -1,22 +1,51 @@
 import MusicPlayer from "./musicplayer/index";
-import { playingTrackState } from "../atoms/playerAtom";
+import { currentPlaylistState, playingTrackState } from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+
+type ReorderProps = (
+  list: Track[],
+  startIndex: number,
+  endIndex: number
+) => Track[];
 
 const Layout = ({ children }: any) => {
   const router = useRouter();
   const playingTrack = useRecoilValue<Track>(playingTrackState);
+  const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
 
   if (router.pathname === "/auth/signin") return children;
+  const reorder: ReorderProps = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source } = result;
+
+    if (!destination) {
+      return;
+    }
+    const startIndex = source.index;
+    const endIndex = destination.index;
+
+    const newList = reorder(currentPlaylist, startIndex, endIndex);
+
+    setCurrentPlaylist(newList);
+  };
 
   return (
     <>
       <Sidebar />
       <main className="flex min-h-screen min-w-full bg-black">
-        {children}
+        <DragDropContext onDragEnd={onDragEnd}>{children}</DragDropContext>
 
         {playingTrack && (
           <div className="fixed bottom-0 left-0 right-0 z-50">

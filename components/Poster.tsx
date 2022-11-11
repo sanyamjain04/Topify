@@ -1,5 +1,5 @@
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
-import { chooseTrackProps, Track } from "../types/body.types";
+import { Track } from "../types/body.types";
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../atoms/playerAtom";
 import Image from "next/legacy/image";

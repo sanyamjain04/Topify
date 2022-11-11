@@ -13,17 +13,16 @@ import { useRouter } from "next/router";
 
 function Sidebar() {
   const [selectedCategory, setSelectedCategory] = useState<string>("/");
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    setSelectedCategory(router.pathname)
-  }, [router.pathname])
-  
+    setSelectedCategory(router.pathname);
+  }, [router.pathname]);
 
   const SidebarNav = [
     { route: "/", icon: <HomeIcon /> },
     { route: "/explore", icon: <RiCompassFill /> },
-    { route: "", icon: <FaMicrophoneAlt /> },
+    { route: "/player", icon: <FaMicrophoneAlt /> },
     { route: "/playlist", icon: <ChartBarIcon /> },
     { route: "/history", icon: <ClockIcon /> },
     { route: "", icon: <DotsHorizontalIcon /> },

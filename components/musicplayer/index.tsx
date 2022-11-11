@@ -1,4 +1,3 @@
-import hotkeys from 'hotkeys-js';
 import React, { useState, useEffect, useContext } from "react";
 import { useRecoilState } from "recoil";
 import {
