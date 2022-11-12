@@ -43,9 +43,8 @@ function Sidebar() {
 
       <div className="flex sm:flex-col sm:space-y-8">
         {SidebarNav.map((prop, i) => (
-          <div className="flex flex-1 justify-center">
+          <div key={i} className="flex flex-1 justify-center">
             <button
-              key={i}
               className={`sidebarIcon 
               ${selectedCategory === prop.route && "opacity-100"}
               `}
