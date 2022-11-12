@@ -32,8 +32,8 @@ const Explore = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <section className="sm:ml-24 p-2 sm:w-[calc(100vw-120px)] mb-24">
-        <div className="flex flex-col w-[calc(100vw-120px)]">
+      <section className="sm:ml-24 p-2 w-full sm:w-[calc(100vw-120px)] mb-24">
+        <div className="flex flex-col sm:w-[calc(100vw-120px)]">
           <h1 className="text-xl text-green-500 font-bold mx-auto w-full bg-black z-10 top-0 p-2 fixed">
             Explore Tracks
           </h1>

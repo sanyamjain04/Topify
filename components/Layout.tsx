@@ -64,7 +64,7 @@ const Layout = ({ children }: any) => {
         <DragDropContext onDragEnd={onDragEnd}>{children}</DragDropContext>
 
         {playingTrack && (
-          <div className="fixed bottom-0 left-0 right-0 z-50">
+          <div className="fixed bottom-14 sm:bottom-0 left-0 right-0 z-50">
             <MusicPlayer />
           </div>
         )}

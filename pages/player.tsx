@@ -1,14 +1,18 @@
-import { useRecoilState, } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useEffect } from "react";
-import { likeTracksState } from "../atoms/playerAtom";
-import { Track as Tracktype } from "../types/body.types";
+import { likeTracksState, playingTrackState } from "../atoms/playerAtom";
+import { Track } from "../types/body.types";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import CurrentTrack from "../components/CurrentTrack";
 
-const CurrentPlaylist = dynamic(() => import("../components/CurrentPlaylist"), { ssr: false });
+const CurrentPlaylist = dynamic(() => import("../components/CurrentPlaylist"), {
+  ssr: false,
+});
 
 const Player = () => {
-  const [likedTracks, setLikedTracks] = useRecoilState<Tracktype[]>(likeTracksState);
+  const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
+  const currentTrack = useRecoilValue<Track>(playingTrackState);
 
   useEffect(() => {
     setLikedTracks(JSON.parse(localStorage.getItem("likedPlaylist")!));
@@ -20,11 +24,16 @@ const Player = () => {
         <title>Spotify - Playlist</title>
       </Head>
 
-        <section className="sm:ml-24 p-2 w-full">
-          <div className="w-full">
-            <CurrentPlaylist />
+      <section className="flex justify-center gap-2 sm:ml-24 p-2 h-4/5">
+        {currentTrack && (
+          <div className="w-1/2">
+            <CurrentTrack />
           </div>
-        </section>
+        )}
+        <div className="w-1/2">
+          <CurrentPlaylist />
+        </div>
+      </section>
     </div>
   );
 };

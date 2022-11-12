@@ -97,7 +97,7 @@ const Body = () => {
             {searchResults.length === 0 ? "New Releases" : "Tracks"}
           </h2>
 
-          <div className="border-2 border-[#262626] rounded-2xl overflow-y-scroll scrollbarThin h-[370px]">
+          <div className="border-2 border-[#262626] rounded-2xl overflow-y-scroll scrollbarThin h-[380px]">
             {showHomePlaylist
               .slice(4, showHomePlaylist.length)
               .map((track, i) => (

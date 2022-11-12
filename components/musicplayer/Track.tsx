@@ -16,7 +16,7 @@ const Track = ({ play, playingTrack }:TrackProps) => {
       <img src={playingTrack?.images?.coverart} alt="cover art" className="rounded-full" />
     </div>
 
-    <div className="content-start">
+    <div>
 
       <p className="whitespace-nowrap text-white font-bold text-lg">
         {playingTrack?.title ? title : 'No active Song'}

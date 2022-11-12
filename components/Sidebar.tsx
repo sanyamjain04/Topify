@@ -28,28 +28,32 @@ function Sidebar() {
     { route: "", icon: <DotsHorizontalIcon /> },
   ];
   return (
-    <section className="hidden fixed sm:flex flex-col z-50 p-4 items-center bg-black w-[90px] h-screen space-y-8 md:border-r-2">
-      <Link href="/">
-        <Image
-          src="https://rb.gy/xkacau"
-          width={56}
-          height={56}
-          className="object-contain"
-          alt="logo"
-        />
-      </Link>
+    <section className="fixed bottom-0 sm:flex sm:flex-col z-50 p-4 items-center bg-black w-full sm:w-[90px] sm:h-screen space-y-8 md:border-r-2">
+      <div className="hidden sm:inline">
+        <Link href="/">
+          <Image
+            src="https://rb.gy/xkacau"
+            width={56}
+            height={56}
+            className="object-contain"
+            alt="logo"
+            />
+        </Link>
+      </div>
 
-      <div className="flex flex-col space-y-8">
+      <div className="flex sm:flex-col sm:space-y-8">
         {SidebarNav.map((prop, i) => (
-          <button
-            key={i}
-            className={`sidebarIcon 
-            ${selectedCategory === prop.route && "opacity-100"}
-            `}
-            onClick={() => setSelectedCategory(prop.route)}
-          >
-            <Link href={prop.route}>{prop.icon}</Link>
-          </button>
+          <div className="flex flex-1 justify-center">
+            <button
+              key={i}
+              className={`sidebarIcon 
+              ${selectedCategory === prop.route && "opacity-100"}
+              `}
+              onClick={() => setSelectedCategory(prop.route)}
+              >
+              <Link href={prop.route}>{prop.icon}</Link>
+            </button>
+          </div>
         ))}
       </div>
     </section>

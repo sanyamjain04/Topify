@@ -1,6 +1,6 @@
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import { Track } from "../types/body.types";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { likeTracksState, playingTrackState, playState } from "../atoms/playerAtom";
 import Image from "next/legacy/image";
 import TrackContext from "../hooks/trackContext";
@@ -16,7 +16,7 @@ function Poster({ track, playlist }: PosterProps) {
   const [hasLiked, setHasLiked] = useState<boolean>(false);
   const [play, setPlay] = useRecoilState<boolean>(playState);
   const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
-  const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
+  const playingTrack = useRecoilValue<Track>(playingTrackState);
   const {chooseTrack} = useContext(TrackContext)
 
   const index = likedTracks?.findIndex(
@@ -82,7 +82,7 @@ function Poster({ track, playlist }: PosterProps) {
           </h6>
         </div>
       </div>
-      
+
       <div className=" hidden group-hover:block absolute top-4 right-4">
         <Heart hasLiked={hasLiked} handleLike={handleLike} />
       </div>

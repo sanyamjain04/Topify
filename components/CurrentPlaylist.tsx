@@ -1,14 +1,16 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { useRecoilValue } from "recoil";
-import { currentPlaylistState } from "../atoms/playerAtom";
+import { currentPlaylistState, playingTrackState } from "../atoms/playerAtom";
 import { Track as TrackType } from "../types/body.types";
 import Track from "./Track";
 
 const CurrentPlaylistPlayer = () => {
   const currentPlaylist = useRecoilValue<TrackType[]>(currentPlaylistState);
+  const currentTrack = useRecoilValue(playingTrackState)
+
   return (
     <>
-      <h1 className="p-2">Current Playlist </h1>
+      <h1 className="p-2">{ currentTrack ? 'Up Next' : 'Choose Track'} </h1>
       <div className="m- overflow-y-scroll scrollbarThin">
         <Droppable droppableId="children">
           {(provided) => (
@@ -20,7 +22,7 @@ const CurrentPlaylistPlayer = () => {
               {currentPlaylist.map((track: TrackType, i: number) => (
                 <Draggable key={i} draggableId={i.toString()} index={i}>
                   {(provided) => (
-                    <div
+                    <div className=""
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
