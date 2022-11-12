@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   currentPlaylistState,
   playingTrackState,
@@ -16,19 +16,21 @@ import TrackContext from "../../hooks/trackContext";
 
 const MusicPlayer = () => {
   const [play, setPlay] = useRecoilState(playState);
-  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
-  const [recentlyPlayed, setRecentlyPlayed] = useRecoilState(recentlyPlayedTracks);
-  const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
+  const playingTrack = useRecoilValue(playingTrackState);
+  const recentlyPlayed = useRecoilValue(recentlyPlayedTracks);
+  const currentPlaylist = useRecoilValue(currentPlaylistState);
   const [duration, setDuration] = useState(0);
   const [seekTime, setSeekTime] = useState(0);
   const [appTime, setAppTime] = useState(0);
   const [volume, setVolume] = useState(0.1);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
-  const {chooseTrack} = useContext(TrackContext)
-  
+  const { chooseTrack } = useContext(TrackContext);
+
   const currentTrackKey = playingTrack?.key;
-  const index = currentPlaylist.findIndex((track: TrackType) => track.key === currentTrackKey);
+  const index = currentPlaylist.findIndex(
+    (track: TrackType) => track.key === currentTrackKey
+  );
 
   useEffect(() => {
     localStorage.removeItem("recentlyPlayed");
@@ -39,9 +41,12 @@ const MusicPlayer = () => {
     setPlay(!play);
   };
 
-    const handleNextSong = () => {
+  const handleNextSong = () => {
     if (shuffle) {
-      chooseTrack(currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)], currentPlaylist);
+      chooseTrack(
+        currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)],
+        currentPlaylist
+      );
     } else if (repeat) {
       chooseTrack(playingTrack, currentPlaylist);
     } else {
@@ -54,11 +59,11 @@ const MusicPlayer = () => {
   const handlePrevSong = () => {
     const nextTrack =
       currentPlaylist[index === 0 ? currentPlaylist.length - 1 : index - 1];
-    chooseTrack(nextTrack,currentPlaylist);
+    chooseTrack(nextTrack, currentPlaylist);
   };
 
   return (
-    <div className="bg-[#181818] flex items-center justify-between px-5 py-2.5 rounded-t-2xl relative sm:space-x-20 md:space-x-0 overflow-x-scroll md:overflow-x-hidden scrollbar-hide">
+    <div className="bg-[#181818] flex items-center justify-between px-5 py-2.5 rounded-t-2xl relative sm:space-x-20 md:space-x-0 scrollbar-hide">
       <Track play={play} playingTrack={playingTrack} />
       <div className="flex-1 flex flex-col items-center justify-center">
         <Controls

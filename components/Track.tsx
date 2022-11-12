@@ -10,6 +10,7 @@ import {
 import { Track } from "../types/body.types";
 import Image from "next/legacy/image";
 import TrackContext from "../hooks/trackContext";
+import Heart from "./track/Heart";
 
 interface TrackProps {
   track: Track;
@@ -50,17 +51,15 @@ function Track({ track, playlist }: TrackProps) {
   function handleLike() {
     if (index == -1) {
       setLikedTracks([...likedTracks, track]);
-      setHasLiked(true);
     } else {
       const newAraay = likedTracks.filter((el: Track) => el.key !== track.key);
       setLikedTracks(newAraay);
-      setHasLiked(false);
     }
   }
 
   return (
-    <div className={`flex items-center justify-between space-x-20 cursor-default hover:bg-white/10 py-2 px-4 rounded-lg group transition ease-out ${track.url === playingTrack?.url && 'bg-white/10'}`}>
-      <div className="flex items-center gap-3">
+    <div className={`flex items-center justify-between space-x-20 hover:bg-white/10 py-2 px-4 rounded-lg group w-full transition ease-out ${track.url === playingTrack?.url && 'bg-white/10'}`}>
+      <div className="flex items-center gap-2">
         <div className="relative w-12 h-12">
           <Image
             src={track.images.coverart}
@@ -79,14 +78,9 @@ function Track({ track, playlist }: TrackProps) {
         </div>
       </div>
 
-      <div className="md:ml-auto flex items-center space-x-2.5">
+      <div className="lg:ml-auto flex items-center space-x-2.5">
         <div className="flex items-center rounded-full border-2 border-[#262626] w-[85px] h-10 relative cursor-pointer group-hover:border-white/40">
-          <AiFillHeart
-            className={`text-xl ml-3 icon ${
-              hasLiked ? "text-[#1ED760]" : "text-[#868686]"
-            }`}
-            onClick={handleLike}
-          />
+          <Heart handleLike={handleLike} hasLiked={hasLiked} />
           {track.url === playingTrack?.url && play ? (
             <>
               <div

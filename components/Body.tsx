@@ -53,7 +53,7 @@ const Body = () => {
   // }
 
   return (
-    <section className="bg-black w-screen ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
+    <section className="bg-black w-full md:w-[calc(100vw-120px)] ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
       <Search search={search} setSearch={setSearch} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
       <div>
         <div className="flex flex-wrap gap-x-5 scrollbar-hide py-0 ml-2 w-full h-full">
@@ -69,7 +69,7 @@ const Body = () => {
 
       <div className="flex gap-x-8 md:relative ml-2 lg:ml-6">
         {/* Genres */}
-        <div className="hidden lg:inline max-w-[270px]">
+        <div className="hidden xlg:inline max-w-[270px]">
           <h2 className="text-white font-bold mb-3">Genres</h2>
           <div className="flex gap-x-2 gap-y-2.5 flex-wrap mb-3">
             {Object.keys(genres).map((genre, i) => (

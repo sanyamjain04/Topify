@@ -1,10 +1,11 @@
 import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import { Track } from "../types/body.types";
 import { useRecoilState } from "recoil";
-import { playingTrackState, playState } from "../atoms/playerAtom";
+import { likeTracksState, playingTrackState, playState } from "../atoms/playerAtom";
 import Image from "next/legacy/image";
 import TrackContext from "../hooks/trackContext";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import Heart from "./track/Heart";
 
 interface PosterProps {
     track : Track
@@ -12,9 +13,24 @@ interface PosterProps {
 }
 
 function Poster({ track, playlist }: PosterProps) {
+  const [hasLiked, setHasLiked] = useState<boolean>(false);
   const [play, setPlay] = useRecoilState<boolean>(playState);
+  const [likedTracks, setLikedTracks] = useRecoilState<Track[]>(likeTracksState);
   const [playingTrack, setPlayingTrack] = useRecoilState<Track>(playingTrackState);
   const {chooseTrack} = useContext(TrackContext)
+
+  const index = likedTracks?.findIndex(
+    (tracks: Track) => tracks.key === track.key
+  );
+  useEffect(() => {
+    let liked = index !== -1 ? true : false;
+    setHasLiked(liked);
+  }, [index]);
+
+  useEffect(() => {
+    localStorage.removeItem("likedPlaylist");
+    localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks));
+  }, [index]);
 
   const handlePlay = () => {
     chooseTrack(track, playlist );
@@ -26,6 +42,14 @@ function Poster({ track, playlist }: PosterProps) {
       setPlay(!play);
     }
   };
+  function handleLike() {
+    if (index == -1) {
+      setLikedTracks([...likedTracks, track]);
+    } else {
+      const newAraay = likedTracks.filter((el: Track) => el.key !== track.key);
+      setLikedTracks(newAraay);
+    }
+  }
 
   return (
     <div
@@ -57,6 +81,10 @@ function Poster({ track, playlist }: PosterProps) {
             {track.artists[0].alias.replace("-", " ")}
           </h6>
         </div>
+      </div>
+      
+      <div className=" hidden group-hover:block absolute top-4 right-4">
+        <Heart hasLiked={hasLiked} handleLike={handleLike} />
       </div>
     </div>
   );

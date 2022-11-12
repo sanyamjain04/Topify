@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       screens: {
         "xsm": "430px",
+        "xlg": "1180px",
         "2xl": "1500px",
       },
       keyframes: {

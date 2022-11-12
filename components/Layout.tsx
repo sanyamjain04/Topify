@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useSession } from "next-auth/react";
+import Loader from "./Loader";
 
 type ReorderProps = (
   list: Track[],
@@ -25,7 +26,13 @@ const Layout = ({ children }: any) => {
       router.push("/auth/signin");
     },
   });
+  
   if (router.pathname === "/auth/signin") return children;
+
+  // Loading animation...
+  if (status === "loading") {
+    return <Loader />;
+  }
 
 
   const reorder: ReorderProps = (list, startIndex, endIndex) => {
