@@ -23,7 +23,7 @@ const Playlist = () => {
 
               <div className="m- overflow-y-scroll scrollbarThin ">
                 <div className="flex flex-col gap-3 p-1 h-[78vh] min-w-max border-2 border-[#262626] rounded-2xl">
-                  {likedTracks.map((track: Track, i: number) => (
+                  {likedTracks.map((track: TrackType, i: number) => (
                     <Track track={track} key={i} playlist={likedTracks} />
                   ))}
                 </div>
