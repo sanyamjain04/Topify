@@ -3,15 +3,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { likeTracksState, recentlyPlayedTracks } from "../atoms/playerAtom";
+import { recentlyPlayedTracks } from "../atoms/playerAtom";
 import Dashboard from "../components/Dashboard";
 import Loader from "../components/Loader";
 import { Track } from "../types/body.types";
 import { recentlyPlayedLRU } from "../utils/cache";
 
 export default function Home() {
-  const setRecentlyPlayed = useSetRecoilState(recentlyPlayedTracks);
-  const setLikedTracks = useSetRecoilState<Track[]>(likeTracksState);
   const router = useRouter();
 
   const { status, data: session } = useSession({
@@ -22,22 +20,8 @@ export default function Home() {
   });
 
   useEffect(() => {
-    setLikedTracks(JSON.parse(localStorage.getItem("likedPlaylist")!));
-  }, []);
-
-  useEffect(() => {
     if (!session) {
       router.push("/auth/signin");
-    }
-  }, []);
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("recentlyPlayed")!);
-    if (data) {
-      data.forEach((track: Track) => {
-        recentlyPlayedLRU.set(track.key, track);
-      });
-      setRecentlyPlayed(recentlyPlayedLRU.get());
     }
   }, []);
 
@@ -51,7 +35,7 @@ export default function Home() {
         <title>Spotify </title>
         <meta
           name="description"
-          content="Spotify Clone built with NEXTJS and Typescript"
+          content="Spotify Clone built with NEXTJS and TypeScript"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

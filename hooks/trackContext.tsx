@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, ReactNode } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
@@ -39,7 +39,7 @@ export const TrackProvider = ({ children }: { children: ReactNode }) => {
     setPlayingTrack(track);
     if (!play) setPlay(!play);
   };
-  
+
   const reorder: ReorderProps = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -63,7 +63,12 @@ export const TrackProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <TrackContext.Provider value={{ chooseTrack, onDragEnd }}>
+    <TrackContext.Provider
+      value={{
+        chooseTrack,
+        onDragEnd,
+      }}
+    >
       {children}
     </TrackContext.Provider>
   );

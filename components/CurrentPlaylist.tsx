@@ -15,7 +15,7 @@ const CurrentPlaylistPlayer = () => {
         <Droppable droppableId="children">
           {(provided) => (
             <div
-              className="border-2 border-[#262626] rounded-2xl overflow-y-scroll w-full h-full max-w-2xl max-h-[78vh] scrollbarThin"
+              className="border-2 border-[#262626] rounded-2xl overflow-y-scroll w-full h-[80vh] max-w-2xl h- md:max-h-[78vh] scrollbarThin"
               {...provided.droppableProps}
               ref={provided.innerRef}
             >

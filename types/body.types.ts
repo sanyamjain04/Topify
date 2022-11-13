@@ -80,7 +80,7 @@ interface Share {
 }
 
 export interface ReorderProps {
-  list : any
+  list: any
   startIndex: number
   endIndex: number
 }

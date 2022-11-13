@@ -33,7 +33,6 @@ const MusicPlayer = () => {
   );
 
   useEffect(() => {
-    localStorage.removeItem("recentlyPlayed");
     localStorage.setItem("recentlyPlayed", JSON.stringify(recentlyPlayed));
   }, [recentlyPlayed]);
 

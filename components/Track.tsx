@@ -1,5 +1,4 @@
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
-import { AiFillHeart } from "react-icons/ai";
 import { useContext, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -32,11 +31,6 @@ function Track({ track, playlist }: TrackProps) {
     setHasLiked(liked);
   }, [index]);
 
-  useEffect(() => {
-    localStorage.removeItem("likedPlaylist");
-    localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks));
-  }, [index]);
-
   const handlePlay = () => {
     chooseTrack(track, playlist);
     if (!playingTrack || track.url === playingTrack.url) {
@@ -58,9 +52,9 @@ function Track({ track, playlist }: TrackProps) {
   }
 
   return (
-    <div className={`flex items-center justify-between space-x-20 hover:bg-white/10 py-2 px-4 rounded-lg group w-full transition ease-out ${track.url === playingTrack?.url && 'bg-white/10'}`}>
-      <div className="flex items-center gap-2">
-        <div className="relative w-12 h-12">
+    <div className={`flex items-center justify-between md:space-x-20 hover:bg-white/10 py-2 px-2 sm:px-4 rounded-lg group transition ease-out ${track.url === playingTrack?.url && 'bg-white/10'}`}>
+      <div className="flex items-center gap-2 ">
+        <div className="relative w-8 h-8 sm:w-12 sm:h-12">
           <Image
             src={track.images.coverart}
             alt=""
@@ -68,17 +62,18 @@ function Track({ track, playlist }: TrackProps) {
             layout="fill"
           />
         </div>
+
         <div>
-          <h4 className="text-white text-sm font-semibold truncate w-56 sm:w-[380px]">
-            {track.title}
+          <h4 className="text-white text-[10px] sm:text-sm font-semibold truncate md:w-56 sm:w-[380px]">
+            {track.title.substring(0,20)}
           </h4>
-          <p className="text-[rgb(179,179,179)] text-[13px] font-semibold group-hover:text-white">
+          <p className="text-[rgb(179,179,179)] text-[10px] font-semibold group-hover:text-white">
             {track.artists[0].alias.replace("-", " ")}
           </p>
         </div>
       </div>
 
-      <div className="lg:ml-auto flex items-center space-x-2.5">
+      <div className="lg:ml-auto flex items-center md:space-x-2.5">
         <div className="flex items-center rounded-full border-2 border-[#262626] w-[85px] h-10 relative cursor-pointer group-hover:border-white/40">
           <Heart handleLike={handleLike} hasLiked={hasLiked} />
           {track.url === playingTrack?.url && play ? (

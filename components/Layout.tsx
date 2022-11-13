@@ -1,23 +1,21 @@
 import MusicPlayer from "./musicplayer/index";
-import { currentPlaylistState, playingTrackState } from "../atoms/playerAtom";
+import { likeTracksState, playingTrackState, recentlyPlayedTracks } from "../atoms/playerAtom";
 import { Track } from "../types/body.types";
-import { useRecoilState, useRecoilValue } from "recoil";
-import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect, useContext } from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 import { useSession } from "next-auth/react";
 import Loader from "./Loader";
-
-type ReorderProps = (
-  list: Track[],
-  startIndex: number,
-  endIndex: number
-) => Track[];
+import { recentlyPlayedLRU } from "../utils/cache";
+import TrackContext from "../hooks/trackContext";
 
 const Layout = ({ children }: any) => {
   const playingTrack = useRecoilValue<Track>(playingTrackState);
-  const [currentPlaylist, setCurrentPlaylist] = useRecoilState(currentPlaylistState);
+  const  [likedTracks, setLikedTracks] = useRecoilState(likeTracksState);
+  const setRecentlyPlayed = useSetRecoilState(recentlyPlayedTracks);
+  const {onDragEnd} = useContext(TrackContext)
   const router = useRouter();
   
   const { status, data: session } = useSession({
@@ -27,35 +25,35 @@ const Layout = ({ children }: any) => {
     },
   });
   
+  useEffect(()=>{
+    const likedTrackLS = JSON.parse(localStorage.getItem("likedPlaylist")!)
+    if(likedTrackLS){
+      setLikedTracks(()=>likedTrackLS)
+    }
+  },[])
+
+  useEffect(()=>{
+    if(likedTracks.length > 0) {
+      localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks))
+    }
+  },[likedTracks])
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("recentlyPlayed")!);
+    if (data) {
+      data.forEach((track: Track) => {
+        recentlyPlayedLRU.set(track.key, track);
+      });
+      setRecentlyPlayed(recentlyPlayedLRU.get());
+    }
+  }, []);
+
   if (router.pathname === "/auth/signin") return children;
 
   // Loading animation...
   if (status === "loading") {
     return <Loader />;
   }
-
-
-  const reorder: ReorderProps = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-  };
-
-  const onDragEnd = (result: DropResult) => {
-    const { destination, source } = result;
-
-    if (!destination) {
-      return;
-    }
-    const startIndex = source.index;
-    const endIndex = destination.index;
-
-    const newList = reorder(currentPlaylist, startIndex, endIndex);
-
-    setCurrentPlaylist(newList);
-  };
 
   return (
     <>

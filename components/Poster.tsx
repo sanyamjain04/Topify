@@ -22,14 +22,10 @@ function Poster({ track, playlist }: PosterProps) {
   const index = likedTracks?.findIndex(
     (tracks: Track) => tracks.key === track.key
   );
+
   useEffect(() => {
     let liked = index !== -1 ? true : false;
     setHasLiked(liked);
-  }, [index]);
-
-  useEffect(() => {
-    localStorage.removeItem("likedPlaylist");
-    localStorage.setItem("likedPlaylist", JSON.stringify(likedTracks));
   }, [index]);
 
   const handlePlay = () => {
@@ -42,12 +38,13 @@ function Poster({ track, playlist }: PosterProps) {
       setPlay(!play);
     }
   };
+
   function handleLike() {
     if (index == -1) {
-      setLikedTracks([...likedTracks, track]);
+      setLikedTracks(()=>[...likedTracks, track]);
     } else {
       const newAraay = likedTracks.filter((el: Track) => el.key !== track.key);
-      setLikedTracks(newAraay);
+      setLikedTracks(()=>newAraay);
     }
   }
 
@@ -59,7 +56,7 @@ function Poster({ track, playlist }: PosterProps) {
       <Image
         src={track.images.coverart}
         alt=""
-        className="h-12 w-12 absolute inset-0 object-contain rounded-[50px] opacity-80 group-hover:opacity-100 p-2"
+        className="z-0 h-12 w-12 absolute inset-0 object-contain rounded-[50px] opacity-80 group-hover:opacity-100 p-2"
         quality={0}
         width={320}
         height={320}
@@ -86,6 +83,7 @@ function Poster({ track, playlist }: PosterProps) {
       <div className=" hidden group-hover:block absolute top-4 right-4">
         <Heart hasLiked={hasLiked} handleLike={handleLike} />
       </div>
+      
     </div>
   );
 }

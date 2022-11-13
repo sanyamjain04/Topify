@@ -8,7 +8,7 @@ export default function Dropdown() {
   const { data: session } = useSession();
 
   return (
-    <Menu as="div" className="w-24 h-12 relative flex items-center">
+    <Menu as="div" className=" z-10 w-24 h-12 relative flex items-center">
       <div className="w-full absolute right-1 group">
         <Menu.Button className="flex items-center w-full px-4 py-3 text-sm font-medium text-white bg-[#1A1A1A] rounded-full hover:bg-[#3E3E3E]">
           <ChevronDownIcon className="h-6 text-[#686868]" aria-hidden="true" />
