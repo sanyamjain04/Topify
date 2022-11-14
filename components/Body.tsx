@@ -48,7 +48,6 @@ const Body = () => {
  
   const searchQuery = (e :any) => {
     e.preventDefault()
-    console.log("fired")
     const options = {
       method: 'GET',
       headers: {
@@ -59,9 +58,7 @@ const Body = () => {
   
   fetch(`https://shazam-core.p.rapidapi.com/v1/search/multi?query=${search}&search_type=SONGS`, options)
     .then(response => response.json())
-    .then(response => {setSearchresults(response.tracks.hits)
-    console.log(response.tracks.hits);
-    })
+    .then(response => setSearchresults(response.tracks.hits))
     .catch(err => console.error(err));
     
   }  

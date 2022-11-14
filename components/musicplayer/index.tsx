@@ -32,6 +32,32 @@ const MusicPlayer = () => {
     (track: TrackType) => track.key === currentTrackKey
   );
 
+  const handleKeyPress = (event: any) => {
+    const keypressed = event?.key.toLowerCase();
+
+    if (event.key == " "){
+      event.preventDefault()
+      setPlay(prev=>!prev)
+
+    } else if (keypressed == "m"  ){ 
+       if (volume === 0) setVolume(()=>0.5)
+       else setVolume(()=>0)
+      
+    }else if (keypressed == "arrowright") setSeekTime(()=>appTime + 5)
+     else if (keypressed == "arrowleft") setSeekTime(()=>appTime - 5)
+     else if (keypressed == "l") handleNextSong()
+     else if (keypressed == "j") handlePrevSong()
+  }
+  
+  useEffect(() => {
+    // attach the event listener
+    document.addEventListener('keydown', handleKeyPress);
+    // remove the event listener
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
   useEffect(() => {
     localStorage.setItem("recentlyPlayed", JSON.stringify(recentlyPlayed));
   }, [recentlyPlayed]);
