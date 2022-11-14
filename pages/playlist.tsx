@@ -11,7 +11,7 @@ const Playlist = () => {
     <div className="md:w-[calc(100vw-120px)] w-full">
 
       <Head>
-        <title>Spotify - Playlist</title>
+        <title>Spotify - Liked Playlist</title>
       </Head>
 
       <section className="sm:ml-24 p-2 w-full">
@@ -19,10 +19,10 @@ const Playlist = () => {
 
           {likedTracks.length > 0 ? (
             <div>
-              <h1 className="p-2">Liked Playlist </h1>
+              <h1 className="text-xl text-green-500 font-bold mx-auto w-full bg-black z-10 top-0 p-2 fixed">Liked Playlist </h1>
 
-              <div className="m- overflow-y-scroll scrollbarThin ">
-                <div className="flex flex-col gap-3 p-1 h-[78vh] min-w-max border-2 border-[#262626] rounded-2xl">
+              <div className="mt-10 overflow-y-scroll scrollbarThin ">
+                <div className="flex flex-col gap-3 p-1 h-[78vh] min-w-max border-2 border-[#262626] rounded-2xl overflow-y-scroll scrollbarThin">
                   {likedTracks.map((track: TrackType, i: number) => (
                     <Track track={track} key={i} playlist={likedTracks} />
                   ))}

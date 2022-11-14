@@ -75,7 +75,7 @@ function Poster({ track, playlist }: PosterProps) {
         <div className="text-[10px] sm:text-[15px]">
           <h4 className="font-bold truncate w-40">{track.title}</h4>
           <h6 className="capitalize truncate">
-            {track.artists[0].alias.replace("-", " ")}
+            {track?.artists[0]?.alias?.replace("-", " ") || ""}
           </h6>
         </div>
       </div>

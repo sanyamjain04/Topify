@@ -68,7 +68,7 @@ function Track({ track, playlist }: TrackProps) {
             {track.title.substring(0,20)}
           </h4>
           <p className="text-[rgb(179,179,179)] text-[10px] font-semibold group-hover:text-white">
-            {track.artists[0].alias.replace("-", " ")}
+            {(track?.artists[0]?.alias || "").replace("-", " ") || ""}
           </p>
         </div>
       </div>

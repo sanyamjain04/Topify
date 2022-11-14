@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Body = () => {
   const [search, setSearch] = useState<string>("");
-  const [searchResults, setSearchresults] = useState<string[]>([]);
+  const [searchResults, setSearchresults] = useState<any>([]);
   const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [showHomePlaylist, setShowHomePlaylist] = useState<TrackType[]>(musicTracksData)
 
@@ -45,27 +45,47 @@ const Body = () => {
   //     .catch((err) => console.error(err));
 
   // }, []);
-  // console.log(music);
-
-  // function selectGenre(genre: any) {
-  //   setCurrentPlaylist(genre.playList);
-  //   setSelectedGenre(genre.name);
-  // }
+ 
+  const searchQuery = (e :any) => {
+    e.preventDefault()
+    console.log("fired")
+    const options = {
+      method: 'GET',
+      headers: {
+      'X-RapidAPI-Key': '2e445e07b9mshede7d00d0b93695p127d1ajsn6e681578ac80',
+      'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
+    }
+  };
+  
+  fetch(`https://shazam-core.p.rapidapi.com/v1/search/multi?query=${search}&search_type=SONGS`, options)
+    .then(response => response.json())
+    .then(response => {setSearchresults(response.tracks.hits)
+    console.log(response.tracks.hits);
+    })
+    .catch(err => console.error(err));
+    
+  }  
 
   return (
     <section className="bg-black w-screen mb-32 sm:mb-20 md:w-[calc(100vw-120px)] ml-2 sm:ml-24 py-4 space-y-8 md:mr-2.5 md:max-w-[79rem] lg:w-4/5">
 
-      <Search search={search} setSearch={setSearch} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
+      <Search search={search} setSearch={setSearch} selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre} searchQuery={searchQuery} />
 
       <div>
         <div className="flex flex-wrap gap-x-5 scrollbar-hide py-0 ml-2 w-full h-full">
-          {search.length === 0
+          {searchResults.length === 0
             ? showHomePlaylist
                 .slice(0, 4)
                 .map((track, i) => (
                   <Poster key={i} track={track} playlist={showHomePlaylist} />
                 ))
-            : "Loading"}
+            : 
+              searchResults
+                .slice(0, 4)
+                .map((track :any, i:number) => (
+                  <Poster key={i} track={track?.track} playlist={searchResults} />
+              ))
+            }
         </div>
       </div>
 
@@ -86,6 +106,7 @@ const Body = () => {
               </div>
             ))}
           </div>
+          
           <Link href={'/explore'}>
             <button className="whitespace-nowrap text-[#CECECE] bg-[#1A1A1A] text-[13px] py-3.5 px-4 rounded-2xl w-full font-bold bg-opacity-80 hover:bg-opacity-100 transition ease-out"
             >

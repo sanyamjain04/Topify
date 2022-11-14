@@ -37,7 +37,7 @@ function RecentlyPlayed({ track, playlist, button }: RecentlyPlayedprops) {
             {track.title}
           </h4>
           <p className="truncate text-xs text-[#686868] font-semibold cursor-pointer hover:underline">
-            {track.artists[0].alias.replace("-", " ").slice(0, 15)}
+            {(track?.artists[0]?.alias || "").replace("-", " ").slice(0, 15) || ""}
           </p>
         </div>
       </div>
