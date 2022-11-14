@@ -41,6 +41,7 @@ const MusicPlayer = () => {
   };
 
   const handleNextSong = () => {
+    setPlay(prev=>!prev)
     if (shuffle) {
       chooseTrack(
         currentPlaylist[Math.floor(Math.random() * currentPlaylist.length)],
@@ -53,8 +54,11 @@ const MusicPlayer = () => {
         currentPlaylist[index === currentPlaylist.length - 1 ? 0 : index + 1];
       chooseTrack(nextTrack, currentPlaylist);
     }
+    setTimeout(()=>{
+      setPlay(true)
+    }, 100)
   };
-
+  
   const handlePrevSong = () => {
     const nextTrack =
       currentPlaylist[index === 0 ? currentPlaylist.length - 1 : index - 1];

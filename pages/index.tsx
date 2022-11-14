@@ -2,12 +2,8 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { recentlyPlayedTracks } from "../atoms/playerAtom";
 import Dashboard from "../components/Dashboard";
 import Loader from "../components/Loader";
-import { Track } from "../types/body.types";
-import { recentlyPlayedLRU } from "../utils/cache";
 
 export default function Home() {
   const router = useRouter();
