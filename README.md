@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Contents 
 
-## Getting Started
+1. [Features](#features)
+1. [TechStack](#techstack)
+1. [ScreenShots](#screenshots)
 
-First, run the development server:
+## Features
+1. LRU cache : Implemented LRU cache, which will cache the last 25 played tracks and save it in new recently played playlist.
+1. Drag and Drop Playlist : User can change the tracks order in the playlist.
+1. Have liked functionality, it will create a new playlist called liked playlist and saved it there. 
+1. Audio Player: Can play/pause, mute, control seekbar, next play , previous play , shuffle playlist and repeat playlist.
+1. Authentication : Implemented Next-Auth for authentication.
+1. Search Songs : Search songs 
+1. Shortcut keys : Functionlities like play (space), mute (m), next song (l), previous song(j) can be accessible by keyboard keys also.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## TechStack
+- NextJs, TypeScript, Tailwind, Shazam Core Api 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ScreenShots 
+#### Mobile 
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+|HomePage| Explore | Player | Liked |  History    |
+|--------|-------------|-----------|-----------|---------|
+|![sanyam-spotify netlify app_](https://user-images.githubusercontent.com/107163858/201981124-d153d50c-664d-403b-95c7-cf059183082d.png)|![sanyam-spotify netlify app_ (1)](https://user-images.githubusercontent.com/107163858/201979826-8a372816-5bec-4c65-a13a-d057a7a7b824.png)|![sanyam-spotify netlify app_ (2)](https://user-images.githubusercontent.com/107163858/201979841-6b1836e4-4baf-4af9-a87c-107b0ea86d83.png)|![sanyam-spotify netlify app_ (3)](https://user-images.githubusercontent.com/107163858/201979849-f285c209-fc52-412d-a330-6ccc56471afe.png)|![sanyam-spotify netlify app_ (4)](https://user-images.githubusercontent.com/107163858/201979853-d6adac26-940e-4eb0-9ee7-e5365e894ac9.png)|
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Desktop
+##### HomePage
+![image](https://user-images.githubusercontent.com/107163858/201981632-5326604a-bd15-4dd7-8dbd-0dff83df83f2.png)
+##### Explore Page
+![image](https://user-images.githubusercontent.com/107163858/201981777-a15a7cd1-c65a-43ae-b1b9-a930210db4c3.png)
+##### Player page (with Drag and Drop feature to reorder playlist)
+![image](https://user-images.githubusercontent.com/107163858/201981954-34f75959-632e-4b56-a5be-2f0babed368a.png)
+##### Liked Playlist
+![image](https://user-images.githubusercontent.com/107163858/201982040-d4e38a6f-4db1-40fd-9ddc-e80f362edf5b.png)
+##### History Page
+![image](https://user-images.githubusercontent.com/107163858/201982121-5b2238f4-b936-47e9-8d74-a8354cc78852.png)
