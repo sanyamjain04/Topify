@@ -51,15 +51,15 @@ const Body = () => {
     const options = {
       method: 'GET',
       headers: {
-      'X-RapidAPI-Key': '2e445e07b9mshede7d00d0b93695p127d1ajsn6e681578ac80',
+      'X-RapidAPI-Key':  process.env.NEXT_APP_RAPID_API_KEY,
       'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
     }
   };
   
-  fetch(`https://shazam-core.p.rapidapi.com/v1/search/multi?query=${search}&search_type=SONGS`, options)
-    .then(response => response.json())
-    .then(response => setSearchresults(response.tracks.hits))
-    .catch(err => console.error(err));
+  // fetch(`https://shazam-core.p.rapidapi.com/v1/search/multi?query=${search}&search_type=SONGS`, options)
+  //   .then(response => response.json())
+  //   .then(response => setSearchresults(response.tracks.hits))
+  //   .catch(err => console.error(err));
     
   }  
 
