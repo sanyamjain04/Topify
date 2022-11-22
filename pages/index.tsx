@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Spotify </title>
+        <title>Topify </title>
         <meta
           name="description"
           content="Spotify Clone built with NEXTJS and TypeScript"

@@ -25,7 +25,7 @@ const Explore = () => {
   return (
     <>
       <Head>
-        <title>Spotify - Explore </title>
+        <title>Topify - Explore </title>
         <meta
           name="description"
           content="Spotify Clone built with NEXTJS and Typescript"

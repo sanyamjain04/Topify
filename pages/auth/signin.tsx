@@ -20,11 +20,11 @@ export default function Signin({ providers }: any) {
   return (
     <div className="bg-black h-screen flex flex-col items-center pt-40 space-y-8">
       <Head>
-        <title>Login - Spotify</title>
+        <title>Login - Topify</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Image
-        src="https://rb.gy/y9mwtb"
+        src="https://media.discordapp.net/attachments/1011970131112505376/1044514089591918662/Frame_1.png?width=738&height=311"
         height={250}
         width={600}
         objectFit="contain"

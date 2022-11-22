@@ -2,6 +2,8 @@
 const nextConfig = {
   images: {
     domains : ["rb.gy",
+    "avatars.githubusercontent.com",
+    "media.discordapp.net",
     "is1-ssl.mzstatic.com",
     "is2-ssl.mzstatic.com",
     "is3-ssl.mzstatic.com",

@@ -32,10 +32,10 @@ function Sidebar() {
       <div className="hidden sm:inline">
         <Link href="/">
           <Image
-            src="https://rb.gy/xkacau"
+            src="https://avatars.githubusercontent.com/u/107163858?v=4"
             width={56}
             height={56}
-            className="object-contain"
+            className="object-contain rounded-full"
             alt="logo"
             />
         </Link>

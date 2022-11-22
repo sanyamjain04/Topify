@@ -11,7 +11,7 @@ const Playlist = () => {
     <div className="md:w-[calc(100vw-120px)] w-full">
 
       <Head>
-        <title>Spotify - Liked Playlist</title>
+        <title>Topify - Liked Playlist</title>
       </Head>
 
       <section className="sm:ml-24 p-2 w-full">

@@ -10,7 +10,7 @@ export default function History() {
   return (
     <>
       <Head>
-        <title>Spotify - History </title>
+        <title>Topify - History </title>
         <meta
           name="description"
           content="Spotify Clone built with NEXTJS and Typescript"

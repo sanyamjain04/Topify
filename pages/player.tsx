@@ -15,7 +15,7 @@ const Player = () => {
   return (
     <div className="md:w-[calc(100vw-120px)] w-full">
       <Head>
-        <title>Spotify - Playlist</title>
+        <title>Topify - Playlist</title>
       </Head>
 
       <section className="flex flex-col justify-center gap-2 mb-32 sm:mb-2 sm:ml-24 p-2">
