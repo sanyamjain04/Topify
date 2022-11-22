@@ -48,13 +48,13 @@ const Body = () => {
  
   const searchQuery = (e :any) => {
     e.preventDefault()
-    const options = {
-      method: 'GET',
-      headers: {
-      'X-RapidAPI-Key':  process.env.NEXT_APP_RAPID_API_KEY,
-      'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
-    }
-  };
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //     'X-RapidAPI-Key':  process.env.NEXT_APP_RAPID_API_KEY,
+  //     'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
+  //   }
+  // };
   
   // fetch(`https://shazam-core.p.rapidapi.com/v1/search/multi?query=${search}&search_type=SONGS`, options)
   //   .then(response => response.json())
