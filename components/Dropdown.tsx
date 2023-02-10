@@ -2,22 +2,21 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { LogoutIcon } from "@heroicons/react/outline";
-import { signOut, useSession } from "next-auth/react";
 
 export default function Dropdown() {
-  const { data: session } = useSession();
+  const session = null;
 
   return (
     <Menu as="div" className=" z-10 w-24 h-12 relative flex items-center">
       <div className="w-full absolute right-1 group">
         <Menu.Button className="flex items-center w-full px-4 py-3 text-sm font-medium text-white bg-[#1A1A1A] rounded-full hover:bg-[#3E3E3E]">
           <ChevronDownIcon className="h-6 text-[#686868]" aria-hidden="true" />
-            <img
-              src={session!.user.image}
+          {/* <img
+              src={session?}
               alt=""
               referrerPolicy="no-referrer"
               className="rounded-full w-11 h-11 absolute -right-1 object-cover"
-            />
+            /> */}
         </Menu.Button>
       </div>
       <Transition
@@ -37,7 +36,6 @@ export default function Dropdown() {
                   className={`${
                     active && "bg-white/10"
                   } group flex rounded-md items-center w-full px-2 py-2 text-sm font-semibold tracking-wide text-white cursor-default`}
-                  onClick={() => signOut({ redirect: false })}
                 >
                   <LogoutIcon className="w-5 h-5 mr-2" aria-hidden="true" />
                   Log out

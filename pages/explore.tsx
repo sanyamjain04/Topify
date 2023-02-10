@@ -55,10 +55,8 @@ const Explore = () => {
                   ))}
                 </div>
               </div>
-              
             </div>
           ))}
-
         </div>
       </section>
     </>

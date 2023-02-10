@@ -1,6 +1,6 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 import { Track } from "../types/body.types";
-import musicTracksData  from '../data/musicTracks.json'
+import musicTracksData from '../data/musicTracks.json'
 
 export const playState = atom({
   key: "1",

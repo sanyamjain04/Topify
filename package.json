@@ -14,7 +14,6 @@
     "@tailwindcss/forms": "^0.5.3",
     "@types/react-beautiful-dnd": "^13.1.2",
     "next": "13.0.0",
-    "next-auth": "^4.16.2",
     "react": "18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "18.2.0",

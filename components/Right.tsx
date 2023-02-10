@@ -25,7 +25,7 @@ function Right({ recentlyPlayed }: RightProps) {
           </div>
         </div>
         {/* Profile */}
-        <Dropdown />
+        {/* <Dropdown /> */}
       </div>
 
       {/* Recently Played Tracks */}
