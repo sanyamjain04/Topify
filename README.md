@@ -9,7 +9,7 @@ Contents
 1. Drag and Drop Playlist : User can change the tracks order in the playlist.
 1. Have liked functionality, it will create a new playlist called liked playlist and saved it there. 
 1. Audio Player: Can play/pause, mute, control seekbar, next play , previous play , shuffle playlist and repeat playlist.
-1. Authentication : Implemented Next-Auth for authentication.
+
 1. Search Songs : Search songs 
 1. Shortcut keys : Functionlities like play (space), mute (m), next song (l), previous song(j) can be accessible by keyboard keys also.
 
